@@ -3,420 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squishables | Hands On, Screens Off.</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            /* Marka Renkleri - PDF'teki görsel kimliğe uygun pastel tonlar */
-            --primary: #FFB7B2;   /* Pembe */
-            --secondary: #B5EAD7; /* Mint */
-            --accent: #FFDAC1;    /* Şeftali */
-            --text: #555555;
-            --bg: #FFFDFD;
-            --card-bg: #ffffff;
-            --dark: #2F2E41;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Quicksand', sans-serif; transition: all 0.3s ease; }
-        body { background-color: var(--bg); color: var(--text); padding-top: 80px; }
-        
-        /* --- UI COMPONENTS --- */
-        button { cursor: pointer; border: none; outline: none; }
-        .btn { padding: 12px 25px; border-radius: 30px; font-weight: 700; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-secondary { background: var(--secondary); color: #3c6e58; }
-        .btn-accent { background: var(--accent); color: #d35400; }
-
-        /* --- HEADER --- */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
-            padding: 15px 50px; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
-        }
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); display: flex; flex-direction: column; line-height: 1; }
-        .logo span { font-size: 0.7rem; color: var(--secondary); letter-spacing: 1.5px; margin-top: 3px; text-transform: uppercase; }
-        
-        .nav-menu { display: flex; gap: 30px; background: #f8f8f8; padding: 10px 30px; border-radius: 50px; }
-        .nav-link { cursor: pointer; font-weight: 600; color: #999; position: relative; }
-        .nav-link.active { color: var(--dark); }
-        .nav-link.active::after { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; background: var(--primary); border-radius: 50%; }
-
-        .user-stats { display: flex; gap: 15px; }
-        .stat-badge { background: var(--card-bg); border: 1px solid #eee; padding: 8px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 8px; }
-
-        /* --- SECTIONS GENERAL --- */
-        .section { display: none; padding: 40px 5%; animation: fadeIn 0.5s; min-height: 80vh; }
-        .section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--dark); }
-        p.subtitle { font-size: 1.1rem; color: #888; max-width: 700px; margin-bottom: 40px; line-height: 1.6; }
-
-        /* --- 1. HAKKIMIZDA (INTERAKTİF) --- */
-        .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
-        .mission-card { background: white; padding: 30px; border-radius: 20px; text-align: center; border-bottom: 5px solid transparent; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-        .mission-card:hover { transform: translateY(-10px); }
-        .mission-card.problem { border-color: var(--primary); }
-        .mission-card.solution { border-color: var(--secondary); }
-        .mission-card.result { border-color: var(--accent); }
-        
-        .flip-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
-
-        /* --- 2. EĞİTİM AKADEMİSİ (MATEMATİK, FEN, DUYGU) --- */
-        .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .lesson-card { 
-            background: white; border-radius: 25px; overflow: hidden; cursor: pointer; position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 2px solid transparent;
-        }
-        .lesson-card:hover { border-color: var(--secondary); }
-        .lesson-cover { height: 180px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
-        .lesson-body { padding: 25px; }
-        .badge { font-size: 0.7rem; padding: 5px 10px; border-radius: 10px; text-transform: uppercase; font-weight: bold; color: white; }
-        .badge.math { background: var(--accent); }
-        .badge.science { background: var(--secondary); }
-        .badge.art { background: var(--primary); }
-
-        /* --- 3. ETKİNLİKLER (ASLI ENVER WORKSHOP) --- */
-        .event-banner {
-            background: linear-gradient(135deg, #FFB7B2, #FFDAC1);
-            border-radius: 30px; padding: 50px; color: white;
-            display: flex; align-items: center; justify-content: space-between;
-            position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(255, 183, 178, 0.3);
-        }
-        .event-content { z-index: 2; max-width: 60%; }
-        .event-content h3 { font-size: 2.5rem; margin-bottom: 15px; }
-        .event-image { font-size: 10rem; opacity: 0.2; position: absolute; right: 20px; bottom: -20px; transform: rotate(-15deg); }
-        
-        .challenge-list { margin-top: 50px; }
-        .challenge-item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 20px; margin-bottom: 15px; border-radius: 15px; border-left: 5px solid var(--secondary); }
-
-        /* --- 4. MARKET --- */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-        .product { background: white; border-radius: 20px; padding: 20px; text-align: center; position: relative; border: 1px solid #eee; }
-        .product:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .product img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 15px; }
-        
-        /* --- 5. ÖDÜL SİSTEMİ --- */
-        .reward-dashboard { background: white; border-radius: 30px; padding: 40px; text-align: center; max-width: 800px; margin: 0 auto; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        .level-circle { width: 150px; height: 150px; border-radius: 50%; border: 10px solid var(--secondary); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 3rem; color: var(--secondary); }
-        
-        /* --- MODALS (WORKSPACE) --- */
-        .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(255,255,255,0.95); z-index: 2000; display: none; justify-content: center; align-items: center; }
-        .workspace-container { width: 90%; height: 90%; background: white; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); display: flex; overflow: hidden; border: 1px solid #eee; }
-        
-        .ws-sidebar { width: 300px; background: #f9f9f9; padding: 30px; border-right: 1px solid #eee; display: flex; flex-direction: column; }
-        .ws-content { flex-grow: 1; padding: 50px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
-        
-        .step-display { font-size: 8rem; margin-bottom: 30px; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
-    </style>
+    <title>Squishables | Hands On, Screens Off. Duyusal Oyun Kitleri</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            Squishables
-            <span>Hands On, Screens Off.</span>
+        <div class="logo-container">
+            <img src="assets/logo.jpg" alt="Squishables Logo" class="logo">
+            <h1>Squishables</h1>
         </div>
-        <nav class="nav-menu">
-            <div class="nav-link active" onclick="showSection('home')">Ana Sayfa</div>
-            <div class="nav-link" onclick="showSection('about')">Hakkımızda</div>
-            <div class="nav-link" onclick="showSection('education')">Eğitim Akademisi</div>
-            <div class="nav-link" onclick="showSection('events')">Etkinlikler</div>
-            <div class="nav-link" onclick="showSection('market')">Market</div>
-            <div class="nav-link" onclick="showSection('rewards')">Ödüllerim</div>
+        <nav id="main-nav">
+            <a href="#urunler">MoodMakers Kit</a>
+            <a href="#misyon">Misyon & Veriler</a>
+            <a href="#app">Mobil Uygulama</a>
+            <a href="#isbirlikleri">İşbirlikleri</a>
         </nav>
-        <div class="user-stats">
-            <div class="stat-badge"><i class="fas fa-star" style="color:#f1c40f"></i> <span id="userPoints">1250</span> P</div>
-            <div class="stat-badge" style="background:var(--primary); color:white; border:none;">Seviye 2</div>
-        </div>
+        <button class="nav-toggle" aria-label="Menü Aç/Kapa">☰</button>
     </header>
 
-    <section id="home" class="section active">
-        <div style="text-align: center; padding: 60px 0;">
-            <h1 style="font-size: 3.5rem; color: var(--dark); margin-bottom: 20px;">Ekranları Kapat,<br><span style="color:var(--primary)">Yaratıcılığı</span> Aç!</h1>
-            <p class="subtitle" style="margin: 0 auto 40px;">
-                Squishables ile çocuklar tablet başında değil, interaktif hamur setleri ile hem eğleniyor hem öğreniyor. Fen, Matematik ve Duygusal Zeka artık parmaklarının ucunda.
-            </p>
-            <div style="display: flex; gap: 20px; justify-content: center;">
-                <button class="btn btn-primary" onclick="showSection('education')">Ders Seç <i class="fas fa-arrow-right"></i></button>
-                <button class="btn btn-secondary" onclick="showSection('market')">Kutunu Al <i class="fas fa-shopping-bag"></i></button>
-            </div>
-        </div>
+    <main>
+        <section id="hero" class="slogan-section">
+            <p class="slogan">Hands On, Screens Off.</p>
+            <h2>Doğal Duyusal Oyun ile Yaratıcılığı Ateşleyin.</h2>
+            <a href="#urunler" class="cta-button">Şimdi Keşfet</a>
+        </section>
         
-        <div style="display: flex; gap: 30px; margin-top: 60px; justify-content: center;">
-            <div style="text-align: center;">
-                <i class="fas fa-brain" style="font-size: 2rem; color: var(--secondary); margin-bottom: 10px;"></i>
-                <h3>Duygusal Zeka</h3>
-                <small>MoodMakers Serisi</small>
+        <section id="urunler" class="content-box">
+            <h3>MoodMakers Family Bonding Sensory Kit</h3>
+            <div class="product-grid">
+                <div class="product-image">
+                    
+                </div>
+                <div class="product-info">
+                    <p>Özel olarak hazırlanan bu kit, pasif ekran süresini azaltırken ailenizle 30 dakikalık sakin ve yaratıcı ritüeller oluşturmanızı sağlar[cite: 34, 35].</p>
+                    <h4>Kutunun İçeriği:</h4>
+                    <ul>
+                        <li>**Doğal Duyusal Hamur Seti:** 6 farklı doku ve 6 koku[cite: 37, 38].</li>
+                        <li>**Bağ Kurma Kartları:** Aile içi iletişimi destekleyen sorular içerir [cite: 42-45].</li>
+                        <li>**DIY Mini Proje Kartları:** Birlikte yapılabilecek basit, yaratıcı aktiviteler[cite: 39].</li>
+                    </ul>
+                </div>
             </div>
-            <div style="text-align: center;">
-                <i class="fas fa-shapes" style="font-size: 2rem; color: var(--accent); margin-bottom: 10px;"></i>
-                <h3>Matematik</h3>
-                <small>Geometri ve Kesirler</small>
-            </div>
-            <div style="text-align: center;">
-                <i class="fas fa-leaf" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
-                <h3>%100 Doğal</h3>
-                <small>Organik İçerik</small>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="about" class="section">
-        <h2>Hikayemiz & Vizyonumuz</h2>
-        <p class="subtitle">Squishables neden var? [cite: 6, 11, 12]</p>
+        <hr>
 
-        <div class="mission-grid">
-            <div class="mission-card problem">
-                <span class="flip-icon">📱</span>
-                <h3>Problem</h3>
-                <p style="font-size:0.9rem; color:#666; margin-top:10px;">
-                    Pasif ekran süresi çocukların yaratıcılığını ve duygusal gelişimini olumsuz etkiliyor. Aileler sağlıklı bir alternatif arıyor. [cite: 13, 14]
-                </p>
-            </div>
-            <div class="mission-card solution">
-                <span class="flip-icon">🎨</span>
-                <h3>Çözüm: MoodMakers</h3>
-                <p style="font-size:0.9rem; color:#666; margin-top:10px;">
-                    Duyusal oyun hamurları, renk değiştiren boyalar ve bağlantı kartları ile ekran yerine eller çalışıyor. 
-                </p>
-            </div>
-            <div class="mission-card result">
-                <span class="flip-icon">❤️</span>
-                <h3>Hedefimiz</h3>
-                <p style="font-size:0.9rem; color:#666; margin-top:10px;">
-                    Aile bağlarını güçlendirmek ve çocuklara "Sakinleşme Ritüelleri" kazandırmak. [cite: 33, 34]
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="education" class="section">
-        <h2>Yaratıcı Öğrenme Akademisi</h2>
-        <p class="subtitle">Hangi maceraya atılmak istersin? Figürünü seç, masaya geç ve yaparak öğren.</p>
-
-        <div class="edu-grid">
+        <section id="misyon" class="content-box">
+            <h3>Vizyonumuz: Ekran Dışı Deneyimler</h3>
+            <p>Ana hedefimiz, kokulu kil, renk değiştiren boya ve olumlama/bağ kurma kartları içeren bu yaratıcı kutu ile yeni ürün lansmanını başarıyla gerçekleştirmektir[cite: 25, 26].</p>
+            <h4>Hedef Kitlemiz ve Dijital Alışkanlıkları</h4>
+            <p>Birincil kitlemiz: Doğal ve güvenli el becerisi aktiviteleriyle ilgilenen, pasif ekran kullanımından endişe duyan **3-10 yaş arası çocukların ebeveynleri**[cite: 71].</p>
             
-            <div class="lesson-card" onclick="openWorkspace('math')">
-                <div class="lesson-cover" style="background:#FFF5E1;">🍕</div>
-                <div class="lesson-body">
-                    <span class="badge math">Matematik</span>
-                    <h3 style="margin:10px 0;">Kesirler Pizzası</h3>
-                    <p style="font-size:0.9rem; color:#888;">Hamurdan pizza yaparken Yarım, Çeyrek ve Bütün kavramlarını öğren.</p>
-                    <div style="margin-top:15px; font-size:0.8rem; font-weight:bold; color:var(--accent);">
-                        <i class="fas fa-clock"></i> 20 Dk | 6+ Yaş
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-card" onclick="openWorkspace('science')">
-                <div class="lesson-cover" style="background:#E8F8F5;">🌋</div>
-                <div class="lesson-body">
-                    <span class="badge science">Fen Bilgisi</span>
-                    <h3 style="margin:10px 0;">Yanardağ Patlaması</h3>
-                    <p style="font-size:0.9rem; color:#888;">Magma ve Lav arasındaki farkı kendi dağını inşa ederek keşfet.</p>
-                    <div style="margin-top:15px; font-size:0.8rem; font-weight:bold; color:var(--secondary);">
-                        <i class="fas fa-clock"></i> 35 Dk | 5+ Yaş
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-card" onclick="openWorkspace('mood')">
-                <div class="lesson-cover" style="background:#FFF0F0;">😊</div>
-                <div class="lesson-body">
-                    <span class="badge art">Duygusal Zeka</span>
-                    <h3 style="margin:10px 0;">Duygu Heykelleri</h3>
-                    <p style="font-size:0.9rem; color:#888;">Öfke, Neşe ve Şaşkınlık... Duygularını hamurla şekillendir ve tanı. [cite: 43, 44]</p>
-                    <div style="margin-top:15px; font-size:0.8rem; font-weight:bold; color:var(--primary);">
-                        <i class="fas fa-clock"></i> 15 Dk | 3+ Yaş
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="events" class="section">
-        <h2>Etkinlikler ve Topluluk</h2>
-        
-        <div class="event-banner">
-            <div class="event-content">
-                <div style="background:rgba(255,255,255,0.3); display:inline-block; padding:5px 10px; border-radius:10px; font-size:0.8rem; margin-bottom:10px;">🌟 ÖZEL ETKİNLİK</div>
-                <h3>Aslı Enver ile "Hands On" Atölyesi </h3>
-                <p style="margin-bottom:20px;">Ünlü oyuncu ve anne Aslı Enver ile ekranları kapatıp hamurları açıyoruz! Ebeveyn-çocuk atölyemize davetlisiniz.</p>
-                <button class="btn" style="background:white; color:var(--primary);" onclick="alert('Kaydınız alındı! Size mail atacağız.')">Hemen Kayıt Ol</button>
-            </div>
-            <div class="event-image">👩‍🎨</div>
-        </div>
-
-        <div class="challenge-list">
-            <h3>Günlük Görevler (#ScreensOffChallenge) [cite: 133, 140]</h3>
-            
-            <div class="challenge-item">
-                <div>
-                    <strong>📸 Günün Görevi: En Komik Canavar</strong>
-                    <p style="font-size:0.8rem; color:#888;">Hamurdan yaptığın canavarı paylaş, 50 Puan kazan.</p>
-                </div>
-                <button class="btn btn-secondary" style="padding:8px 15px; font-size:0.8rem;">Fotoğraf Yükle</button>
-            </div>
-
-            <div class="challenge-item" style="border-color:var(--primary);">
-                <div>
-                    <strong>🤝 Aile Saati: Birlikte Yap</strong>
-                    <p style="font-size:0.8rem; color:#888;">Anne veya babanla ortak bir heykel yapın.</p>
-                </div>
-                <button class="btn btn-primary" style="padding:8px 15px; font-size:0.8rem;">Tamamladım</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="market" class="section">
-        <h2>Market</h2>
-        <p class="subtitle">Eğitim kitleri ve doğal hamur setleri.</p>
-        
-        <div class="product-grid">
-            <div class="product">
-                <img src="https://via.placeholder.com/150/FFB7B2/FFFFFF?text=MoodMakers" alt="MoodMakers Box">
-                <h3>MoodMakers Box</h3>
-                <p style="font-size:0.9rem; color:#888; margin-bottom:10px;">6 Hamur, 6 Koku, Kartlar [cite: 26]</p>
-                <strong style="display:block; margin-bottom:15px;">850 TL</strong>
-                <button class="btn btn-primary" style="width:100%">Sepete Ekle</button>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/150/B5EAD7/FFFFFF?text=Dough" alt="Organic Dough">
-                <h3>4'lü Organik Hamur</h3>
-                <p style="font-size:0.9rem; color:#888; margin-bottom:10px;">Yenilebilir içerik, toksik değil [cite: 96]</p>
-                <strong style="display:block; margin-bottom:15px;">350 TL</strong>
-                <button class="btn btn-secondary" style="width:100%">Sepete Ekle</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="rewards" class="section">
-        <h2>Sadakat ve Ödüller</h2>
-        <div class="reward-dashboard">
-            <div class="level-circle">2</div>
-            <h3>Yaratıcı Kaşif</h3>
-            <p>Bir sonraki seviye: "Usta Heykeltıraş" (1500 Puan)</p>
-            <div style="background:#eee; height:10px; border-radius:5px; margin:20px 0; overflow:hidden;">
-                <div style="width:80%; height:100%; background:var(--secondary);"></div>
-            </div>
-            <p style="font-size:0.9rem; color:#888;">Toplam Puanın: 1250 P</p>
-            
-            <div style="margin-top:40px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
-                <div><i class="fas fa-medal" style="font-size:2rem; color:gold;"></i><br><small>İlk Sipariş</small></div>
-                <div><i class="fas fa-camera" style="font-size:2rem; color:#ccc;"></i><br><small>İlk Paylaşım</small></div>
-                <div><i class="fas fa-graduation-cap" style="font-size:2rem; color:var(--primary);"></i><br><small>Matematik Ustadı</small></div>
-            </div>
-        </div>
-    </section>
-
-    <div id="workspaceModal" class="modal-overlay">
-        <div class="workspace-container">
-            <div class="ws-sidebar">
-                <h3 id="wsTitle" style="color:var(--dark); margin-bottom:20px;">Ders Başlığı</h3>
-                <div style="flex-grow:1;">
-                    <p id="wsDesc" style="line-height:1.6; color:#666;">Ders açıklaması buraya gelecek.</p>
-                    <div style="background:var(--accent); padding:15px; border-radius:15px; margin-top:20px;">
-                        <strong>💡 İpucu:</strong>
-                        <p id="wsTip" style="font-size:0.9rem;">İpucu metni.</p>
-                    </div>
-                </div>
-                <button class="btn btn-secondary" onclick="closeWorkspace()">Çıkış Yap</button>
-            </div>
-            
-            <div class="ws-content">
-                <div id="wsVisual" class="step-display">🍕</div>
-                <h2 id="wsInstruction" style="text-align:center;">Talimat</h2>
+            <div class="data-analysis">
                 
-                <div style="position:absolute; bottom:40px; display:flex; gap:20px;">
-                    <button class="btn btn-primary" onclick="nextStep()">Tamamladım, Sıradaki! <i class="fas fa-arrow-right"></i></button>
+                <p class="data-source">Türkiye'de 25-44 yaş aralığı, hedef kitlemizle örtüşen en yüksek sosyal medya kullanım oranlarından birine (%85-92) sahiptir. Bu, Instagram'daki güçlü aktivitemizi destekler[cite: 98, 99].</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="app" class="content-box dark-bg">
+            <h3>Squishables Mobil Uygulaması: Bağlılık ve Ödüllendirme</h3>
+            <div class="app-details">
+                <div class="app-image">
+                    
+                </div>
+                <div class="app-features">
+                    <p>Uygulamamız, ekran dışı oyun deneyimini oyunlaştırarak marka sadakatini ve tekrar eden katılımı artırmayı amaçlar[cite: 245].</p>
+                    <ul>
+                        <li>**Günlük Ekran Dışı Meydan Okumalar:** Aileler için aktivite zamanlayıcıları ve hatırlatıcılar[cite: 172].</li>
+                        <li>**Ödül Takibi:** Başarılı meydan okumalar için ödül takibi ve gamification[cite: 173].</li>
+                        <li>**Anlık Bildirimler:** Sürekli katılımı teşvik eden hatırlatıcılar[cite: 174].</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <script>
-        // --- SAYFA YÖNETİMİ ---
-        function showSection(id) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+        <hr>
+
+        <section id="isbirlikleri" class="content-box">
+            <h3>Etkili PR ve İşbirlikleri Planı</h3>
             
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            event.target.classList.add('active');
-            window.scrollTo(0,0);
-        }
+            <h4>1. Aslı Enver İşbirliği (Ünlü)</h4>
+            <p>Yumuşak, doğal anne imajı markamızla mükemmel eşleşmektedir. Kendisiyle yeni ürünümüz **MoodMakers'ın** lansmanının bir parçası olarak çalışıyoruz[cite: 264, 280].</p>
+            <p class="feedback-clarification">**Kampanya Akışı (Geri Bildirim Çözümü):** <br>1. **Kullanım Videosu:** Çocuğuyla birlikte ürünü ve mobil uygulamayı kullandığı bir video yayınlanacak[cite: 269]. <br>2. **PR Paketi:** Ardından PR paketimizi açacak ve hikayesinde ilgili paylaşımlar yapacak[cite: 270]. <br>3. **Workshop:** "Hands On, Screens Off" atölye çalışması ile kampanya zirve yapacak[cite: 278].</p>
+            
+            <h4>2. Psk. Aslı Afşaroğlu İşbirliği (Uzman)</h4>
+            <p>Saygın bir psikolog olarak, ebeveynlere güven aşılamak amacıyla haftalık eğitici hikaye akışları (**"Ekran Süresi ve Duyusal Oyun"**) sunacaktır. Organik oyun hamurunu psikolojik faydaları nedeniyle önerecektir[cite: 302, 304, 305].</p>
+            <blockquote class="critical-note">
+                ⚠️ **Mentor Notu:** Projenin güvenilirliği için, Aslı Afşaroğlu'nun **çocuk psikolojisi** alanında uzmanlığının teyit edilmesi veya bu alanda uzmanlaşmış başka bir psikolog ile işbirliği yapılması kritik önem taşımaktadır.
+            </blockquote>
+        </section>
+    </main>
 
-        // --- EĞİTİM VERİSİ ---
-        const lessons = {
-            math: {
-                title: "Kesirler Pizzası 🍕",
-                steps: [
-                    { visual: "🟡", text: "Sarı hamuru al ve kocaman bir yuvarlak yap. Bu senin 'BÜTÜN' pizzan.", tip: "Matematikte buna 1 Tam denir." },
-                    { visual: "🔪", text: "Plastik bıçağınla tam ortadan ikiye böl. Şimdi elinde iki 'YARIM' var.", tip: "2 Yarım = 1 Bütün." },
-                    { visual: "🍕", text: "Her yarımı tekrar ikiye böl. Tebrikler! 4 tane 'ÇEYREK' elde ettin.", tip: "Kesirleri öğrenmek işte bu kadar kolay!" }
-                ]
-            },
-            science: {
-                title: "Yanardağ Yapımı 🌋",
-                steps: [
-                    { visual: "⛰️", text: "Kahverengi hamurla yüksek bir dağ yap.", tip: "Yeryüzü şekillerini inceliyoruz." },
-                    { visual: "🕳️", text: "Tepesine parmağınla bir delik aç. Buna 'Krater' denir.", tip: "Lavlar buradan çıkacak." },
-                    { visual: "🔥", text: "Kırmızı hamuru incelt ve kraterden aşağı akıt. Lavlar akıyor!", tip: "Magma yeryüzüne çıkınca Lav adını alır." }
-                ]
-            },
-            mood: {
-                title: "Duygu Yüzleri 😊",
-                steps: [
-                    { visual: "😐", text: "Mavi hamurla boş bir yüz yap.", tip: "Bu nötr bir ifade." },
-                    { visual: "😡", text: "Kaşları aşağı indir, ağzı büz. İşte Öfke!", tip: "Öfkelenince derin nefes alıp hamuru sıkabilirsin." },
-                    { visual: "😍", text: "Gözlerin yerine kalpler yap. Bu Sevgi!", tip: "Sevgi bizi mutlu eder." }
-                ]
-            }
-        };
+    <footer>
+        <p>&copy; 2025 Squishables. İletişim: squishables@info.com.tr</p>
+    </footer>
 
-        let currentLessonId = '';
-        let currentStep = 0;
-
-        function openWorkspace(lessonId) {
-            currentLessonId = lessonId;
-            currentStep = 0;
-            document.getElementById('workspaceModal').style.display = 'flex';
-            renderStep();
-        }
-
-        function renderStep() {
-            const data = lessons[currentLessonId].steps[currentStep];
-            document.getElementById('wsTitle').innerText = lessons[currentLessonId].title;
-            document.getElementById('wsVisual').innerText = data.visual;
-            document.getElementById('wsInstruction').innerText = data.text;
-            document.getElementById('wsDesc').innerText = `Adım ${currentStep + 1} / ${lessons[currentLessonId].steps.length}`;
-            document.getElementById('wsTip').innerText = data.tip;
-        }
-
-        function nextStep() {
-            if(currentStep < lessons[currentLessonId].steps.length - 1) {
-                currentStep++;
-                renderStep();
-            } else {
-                alert("Ders Tamamlandı! +50 Puan Kazandın! 🎉");
-                closeWorkspace();
-                // Puan artırma simülasyonu
-                let pts = parseInt(document.getElementById('userPoints').innerText);
-                document.getElementById('userPoints').innerText = pts + 50;
-            }
-        }
-
-        function closeWorkspace() {
-            document.getElementById('workspaceModal').style.display = 'none';
-        }
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
