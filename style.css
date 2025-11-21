@@ -1,199 +1,79 @@
-/* Genel Stil Reset ve Fontlar */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* Temel Ayarlar */
+body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #FFFDF5; color: #5D4037; }
+h1, h2, h3, h4 { color: #5D4037; }
 
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #4a4a4a;
-    background-color: #f7f7f7;
-}
-
-/* Renk Paleti (Logodan Alınan Pastel Tonlar) */
+/* Pastel Renkler */
 :root {
-    --color-primary: #ffc9c9; /* Pastel Pembe */
-    --color-secondary: #fff59d; /* Pastel Sarı */
-    --color-accent: #a8e6cf; /* Pastel Nane Yeşili */
-    --color-text-light: #f4f2e9; /* Bej/Açık Metin */
-    --color-text-dark: #70624e; /* Bej/Koyu Metin (Squishables metni) */
+    --pink: #FFC9C9;
+    --yellow: #FFF59D;
+    --green: #A8E6CF;
+    --brown: #5D4037;
 }
 
-/* Header ve Navigasyon */
-header {
-    background-color: var(--color-text-light);
-    color: var(--color-text-dark);
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky; /* Menüyü yukarı sabitler */
-    top: 0;
-    z-index: 1000;
+/* Header */
+header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+.logo-container { display: flex; align-items: center; gap: 10px; }
+.logo { height: 40px; } /* Logo yoksa bozulmaz */
+nav a { text-decoration: none; color: var(--brown); margin-left: 20px; font-weight: 600; cursor: pointer; }
+.nav-link.active { border-bottom: 3px solid var(--pink); }
+.highlight-btn { background: var(--green); padding: 8px 15px; border-radius: 20px; transition: 0.3s; }
+.highlight-btn:hover { background: #81c7a6; }
+
+/* Sayfa Yapısı */
+.page-section { display: none; padding: 40px 10%; animation: fadeIn 0.5s; min-height: 80vh; }
+.page-section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Hero Bölümü */
+#hero { text-align: center; background: var(--yellow); padding-top: 100px; }
+.slogan { font-size: 3em; font-weight: bold; margin: 0; color: var(--brown); }
+.cta-button { background: var(--pink); color: var(--brown); border: none; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 30px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+.cta-button:hover { transform: scale(1.05); }
+
+/* İçerik Kutuları */
+.content-box { background: white; margin-bottom: 20px; border-radius: 15px; padding: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.grid-layout { display: flex; gap: 30px; align-items: center; margin-top: 20px; }
+.text-side { flex: 1; }
+.image-side { flex: 1; height: 300px; background: #eee; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #888; }
+.dark-bg { background: var(--green); }
+
+/* SWOT */
+.swot-container { display: flex; gap: 20px; }
+.swot-box { flex: 1; padding: 20px; border-radius: 10px; background: #f9f9f9; }
+.strength { border-left: 5px solid var(--green); }
+.weakness { border-left: 5px solid var(--pink); }
+
+/* 🔥 POPUP (MODAL) STİLLERİ - İŞTE BURASI 🔥 */
+.modal {
+    display: none; /* Başlangıçta gizli */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.5); /* Arka plan karartma */
+    backdrop-filter: blur(5px); /* Arkaya bulanıklık efekti */
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
+.modal-content {
+    background-color: white;
+    margin: 5% auto; 
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%; 
+    max-width: 450px; /* Çok geniş olmasın */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    animation: slideDown 0.4s;
 }
 
-.logo {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-}
+@keyframes slideDown { from { top: -50px; opacity: 0; } to { top: 0; opacity: 1; } }
 
-nav a {
-    color: var(--color-text-dark);
-    text-decoration: none;
-    margin-left: 20px;
-    font-weight: bold;
-    padding: 5px 0;
-}
+.close-btn { float: right; font-size: 28px; font-weight: bold; cursor: pointer; color: #aaa; }
+.close-btn:hover { color: black; }
 
-.nav-link.active {
-    border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 5px;
-}
-
-/* Mobil Menü (Opsiyonel: Daha sonra detaylandırılabilir) */
-.nav-toggle {
-    display: none;
-}
-
-/* Slogan ve CTA Bölümü */
-#hero {
-    text-align: center;
-    padding: 80px 5%;
-    background-color: var(--color-secondary);
-}
-
-.slogan {
-    font-size: 2.5em;
-    color: var(--color-text-dark);
-    font-weight: 900;
-}
-
-.mission-tagline {
-    font-size: 1.2em;
-    font-style: italic;
-    color: var(--color-text-dark);
-    margin-top: 10px;
-}
-
-.cta-button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: white;
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-    background-color: #ffb3b3;
-}
-
-/* İçerik Bölümleri */
-section {
-    padding: 60px 5%;
-}
-
-h3 {
-    color: var(--color-text-dark);
-    margin-bottom: 30px;
-    font-size: 1.8em;
-    text-align: center;
-}
-
-/* SPA-Tipi Sayfa Geçişi Stilleri (KRİTİK KISIM) */
-.page-section {
-    display: none; /* Tüm sayfa bölümlerini gizle */
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out; 
-    min-height: 80vh; 
-}
-
-.page-section.active {
-    display: block; /* Aktif olanı göster */
-    opacity: 1;
-}
-
-/* Grid Düzenleri */
-.product-grid, .app-details {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-}
-
-.product-image, .app-image {
-    flex: 1;
-}
-
-.responsive-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.product-info, .app-features {
-    flex: 1;
-}
-
-.dark-bg {
-    background-color: var(--color-accent); 
-    color: var(--color-text-dark);
-}
-
-/* SWOT Analizi Grid */
-.swot-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.swot-item {
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.swot-item h4 {
-    color: var(--color-primary);
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 5px;
-}
-
-.swot-item.weaknesses h4 { color: #f9d863; border-bottom-color: #f9d863; }
-.swot-item.threats h4 { color: #f28d8d; border-bottom-color: #f28d8d; }
-
-/* Demo Adımları */
-.demo-steps {
-    margin-bottom: 40px;
-    padding: 20px;
-    border: 1px dashed var(--color-primary);
-    border-radius: 8px;
-    text-align: center;
-}
-.demo-steps h4 {
-    margin-bottom: 15px;
-    color: var(--color-text-dark);
-}
-
-/* Dipnot (Footer) */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: var(--color-text-dark);
-    color: var(--color-text-light);
-    font-size: 0.9em;
-}
+.demo-form label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9em; }
+.demo-form input, .demo-form textarea { width: 100%; padding: 10px; margin-top: 5px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+.demo-form input:focus { border-color: var(--pink); outline: none; }
+.submit-btn { width: 100%; background: var(--brown); color: white; padding: 15px; border: none; border-radius: 10px; font-size: 1em; margin-top: 20px; cursor: pointer; font-weight: bold; }
+.submit-btn:hover { background: #3e2b24; }
+.note { font-size: 0.8em; color: #888; text-align: center; margin-top: 15px; }
