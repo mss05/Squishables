@@ -1,50 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const navToggle = document.querySelector('.nav-toggle');
-    const mainNav = document.getElementById('main-nav');
-    
-    // Mobil menü Aç/Kapa işlevi (Geliştirme için)
-    navToggle.addEventListener('click', () => {
-        mainNav.classList.toggle('active');
-    });
+    // --- SAYFA GEÇİŞ MANTIĞI ---
+    const navLinks = document.querySelectorAll('.nav-link:not(#nav-signup-btn)'); // Signup butonu hariç linkler
+    const sections = document.querySelectorAll('.page-section');
 
-    // Sayfa Geçiş İşlevi (SPA Mantığı)
-    const navLinks = document.querySelectorAll('.nav-link');
-    const pageSections = document.querySelectorAll('.page-section');
-
-    function switchPage(targetPageId) {
-        // Tüm linklerin ve bölümlerin aktifliğini kaldır
+    function switchPage(pageId) {
+        // Tüm sayfaları gizle
+        sections.forEach(sec => sec.classList.remove('active'));
+        // Tüm linklerin aktifliğini kaldır
         navLinks.forEach(link => link.classList.remove('active'));
         
-        pageSections.forEach(section => {
-            section.classList.remove('active');
-        });
+        // İstenen sayfayı aç
+        const activeSection = document.getElementById(pageId);
+        if(activeSection) activeSection.classList.add('active');
 
-        // Hedef bölümü bul ve aktif hale getir
-        const targetSection = document.getElementById(targetPageId);
-        if (targetSection) {
-            // Bölümü görünür yap ve aktif sınıfını ekle
-            targetSection.style.display = 'block'; 
-            setTimeout(() => targetSection.classList.add('active'), 10); // Kısa gecikme opacity için
-
-            // Tıklanan linki aktif hale getir
-            document.querySelector(`[data-page="${targetPageId}"]`).classList.add('active');
-        }
-        
-        // Mobil menü açıksa kapat (sadece mobil cihazlar için)
-        if (mainNav.classList.contains('active')) {
-             mainNav.classList.remove('active');
-        }
+        // Linki aktif yap
+        const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+        if(activeLink) activeLink.classList.add('active');
     }
 
-    // Linklere tıklama olayını ekle
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            const targetPageId = link.getAttribute('data-page');
-            switchPage(targetPageId);
+            e.preventDefault();
+            const pageId = link.getAttribute('data-page');
+            switchPage(pageId);
         });
     });
 
-    // Sitenin ilk açılışında Anasayfa'yı (hero) göster
-    switchPage('hero'); 
+    // --- 🔥 POPUP (MODAL) MANTIĞI 🔥 ---
+    const modal = document.getElementById('signupModal');
+    const openBtns = document.querySelectorAll('.trigger-popup, #nav-signup-btn'); // Hem menüdeki hem sayfadaki butonlar
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Butonlara tıklayınca aç
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.style.display = "block";
+        });
+    });
+
+    // X işaretine basınca kapat
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Siyah boşluğa tıklayınca kapat
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 });
