@@ -1,0 +1,135 @@
+/* Genel Stil Reset ve Fontlar */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* Daha sonra özel bir font ile değiştirilebilir */
+    line-height: 1.6;
+    color: #4a4a4a;
+    background-color: #f7f7f7; /* Hafif pastel arka plan */
+}
+
+/* Renk Paleti (Logodan Alınan Pastel Tonlar) */
+:root {
+    --color-primary: #ffc9c9; /* Pastel Pembe */
+    --color-secondary: #fff59d; /* Pastel Sarı */
+    --color-accent: #a8e6cf; /* Pastel Nane Yeşili */
+    --color-text-light: #f4f2e9; /* Bej/Açık Metin */
+    --color-text-dark: #70624e; /* Bej/Koyu Metin (Squishables metni) */
+}
+
+/* Header ve Navigasyon */
+header {
+    background-color: var(--color-text-light);
+    color: var(--color-text-dark);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+nav a {
+    color: var(--color-text-dark);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+/* Slogan ve CTA Bölümü */
+#hero {
+    text-align: center;
+    padding: 80px 5%;
+    background-color: var(--color-secondary); /* Pastel Sarı arka plan */
+}
+
+.slogan {
+    font-size: 2.5em;
+    color: var(--color-text-dark);
+    font-weight: 900;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #ffb3b3;
+}
+
+/* İçerik Bölümleri */
+section {
+    padding: 60px 5%;
+}
+
+h3 {
+    color: var(--color-text-dark);
+    margin-bottom: 30px;
+    font-size: 1.8em;
+    text-align: center;
+}
+
+/* Ürün Grid Düzeni */
+.product-grid {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.product-image {
+    flex: 1;
+}
+
+.product-image img, .app-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+/* App ve Data Analizi */
+.dark-bg {
+    background-color: var(--color-accent); /* Pastel Nane Yeşili */
+    color: var(--color-text-dark);
+}
+
+.data-analysis img {
+    display: block;
+    margin: 20px auto;
+    max-width: 70%;
+    border: 3px solid var(--color-text-dark);
+}
+
+/* Dipnot (Footer) */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--color-text-dark);
+    color: var(--color-text-light);
+    font-size: 0.9em;
+}
