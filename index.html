@@ -3,184 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squishables | Hands On, Screens Off. Duyusal Oyun Kitleri</title>
+    <title>Squishables | Hands On, Screens Off.</title>
     <link rel="stylesheet" href="style.css"> 
 </head>
 <body>
 
     <header>
         <div class="logo-container">
-            <img src="logo.png" alt="Squishables Logo" class="logo"> 
+            <img src="logo.png" alt="Squishables" class="logo"> 
             <h1>Squishables</h1>
         </div>
         <nav id="main-nav">
             <a href="#" data-page="hero" class="nav-link active">Anasayfa</a>
             <a href="#" data-page="urunler" class="nav-link">MoodMakers Kit</a>
-            <a href="#" data-page="misyon" class="nav-link">Misyon & Hikayemiz</a>
+            <a href="#" data-page="misyon" class="nav-link">Misyon & Hikaye</a>
             <a href="#" data-page="app" class="nav-link">Mobil Uygulama</a>
-            <a href="#" data-page="analiz" class="nav-link">Analiz & İçerik</a>
-            <a href="#" data-page="demo" class="nav-link">Sipariş Demo</a>
+            <a href="#" data-page="analiz" class="nav-link">Analiz</a>
+            <a href="#" id="nav-signup-btn" class="nav-link highlight-btn">Üye Ol / Sipariş Ver</a>
         </nav>
-        <button class="nav-toggle" aria-label="Menü Aç/Kapa">☰</button>
     </header>
 
     <main>
-        <section id="hero" class="slogan-section page-section active"> 
-            <p class="slogan">Hands On, Screens Off.</p>
-            <h2>Doğal Duyusal Oyun ile Yaratıcılığı Ateşleyin.</h2>
-            <p class="mission-tagline">Soft as a Hug, Kind to the Earth! [cite: 10]</p>
-            <a href="#" data-page="urunler" class="cta-button">MoodMakers Kiti'ni Keşfet</a>
+        <section id="hero" class="page-section active"> 
+            <div class="hero-content">
+                <p class="slogan">Hands On, Screens Off.</p>
+                <h2>Doğal Duyusal Oyun ile Yaratıcılığı Ateşleyin.</h2>
+                [cite_start]<p class="sub-text">Soft as a Hug, Kind to the Earth! [cite: 10]</p>
+                <button class="cta-button trigger-popup">MoodMakers Kiti'ni İncele & Al</button>
+            </div>
         </section>
         
-        <section id="urunler" class="content-box page-section"> 
+        <section id="urunler" class="page-section content-box"> 
             <h3>MoodMakers Family Bonding Sensory Kit</h3>
-            <div class="product-grid">
-                <div class="product-image">
-                    <img src="product-kit.jpg" alt="MoodMakers Kit İçeriği" class="responsive-img">
-                </div>
-                <div class="product-info">
-                    <p>Özel olarak hazırlanmış MoodMakers kiti, sanatsal terapi ve duyusal oyunu birleştirerek ailenizle her gün 30 dakika boyunca sakin ve yaratıcı ritüeller oluşturmanızı sağlar. Ürünlerimiz elinize nazik, doğaya naziktir. [cite: 23]</p>
-                    
-                    <h4>100% Güvenli İçerik ve Sertifikalar</h4>
-                    <p>Hamurumuz, %100 toksik olmayan ve kompostlanabilir gıda biyo içeriklerinden yapılmıştır. [cite: 21] Süper yavaş kurur, su ile kolayca yenilenir ve yüzeylerden temizlenmesi rahattır. [cite: 22]</p>
+            <div class="grid-layout">
+                <div class="text-side">
+                    <p>MoodMakers kiti, sanatsal terapi ve duyusal oyunu birleştirerek ailenizle her gün 30 dakika boyunca sakin ritüeller oluşturmanızı sağlar.</p>
+                    [cite_start]<h4>Kutu İçeriği [cite: 21-23, 38-48]:</h4>
                     <ul>
-                        <li>**Başlıca İçerikler:** Buğday unu, deniz tuzu, organik krem tartar, mısır nişastası, gıda gliserin ve çevre dostu kozmetik içerikler. [cite: 39, 40, 41, 42, 45, 47]</li>
-                        <li>**Sertifikalar:** CE (Avrupa Birliği sağlık ve güvenlik uyumu) [cite: 24, 25], EN 71 Güvenlik Standartlarına uygundur. [cite: 26, 27] Ayrıca bir kriz sonrası **Helal Sertifikası** da alınmıştır. [cite: 35]</li>
+                        <li>🎨 <strong>6 Farklı Doku & Koku:</strong> Muz, Sakız gibi neşeli kokular.</li>
+                        <li>🌿 <strong>%100 Doğal İçerik:</strong> Buğday unu, deniz tuzu, organik krem tartar.</li>
+                        <li>💌 <strong>Bağ Kurma Kartları:</strong> Aile içi iletişimi başlatan sorular.</li>
                     </ul>
-                    <a href="#" data-page="demo" class="cta-button small-btn">Hemen Sipariş Ver</a>
+                    <button class="cta-button small trigger-popup">Sepete Ekle - 450₺</button>
+                </div>
+                <div class="image-side placeholder-img">
+                    <p>Ürün Görseli Alanı</p>
                 </div>
             </div>
         </section>
 
-        <section id="misyon" class="content-box page-section">
-            <h3>Vizyonumuz, Kilit Mesajlar ve Nazan'ın Hikayesi</h3>
+        <section id="misyon" class="page-section content-box">
+            <h3>Misyonumuz ve Kurucumuzun Hikayesi</h3>
+            <p><strong>Vizyon:</strong> Çocukların ellerine renk, yaratıcılık ve özen getirmek. [cite_start]Toksik olmayan, yenebilir içeriklerle güvenli oyun sunmak[cite: 9].</p>
             
-            <div class="mission-statement">
-                <h4>Vizyonumuz ve Misyonumuz</h4>
-                <p>Misyonumuz, yüksek kaliteli, toksik olmayan, organik oyun hamuru üreterek her çocuğun ellerine renk, yaratıcılık ve özen getirmektir. [cite: 9] Sürdürülebilirlik ve etik üretime bağlıyız. [cite: 13]</p>
-                <p class="key-message">**Kilit Mesaj:** Squishables, çocuklara doğal, sakinleştirici, yaratıcı dokunma deneyimi sunarken pasif ekran kullanımını azaltır.</p>
-                
-                <h4>Üç Ana Pazar Sütunu</h4>
-                <div class="pillars-list">
-                    <ul>
-                        <li>**Eğlence (Fun):** El becerisi deneyimiyle interaktif öğrenmeyi teşvik eder. [cite: 134]</li>
-                        <li>**Güvenlik (Safety):** Toksik olmayan, çocuk dostu malzemelerle üretilmiştir. [cite: 135, 136]</li>
-                        <li>**Yaratıcılık (Creativity):** Çocuklarda yaratıcı oyunu teşvik eder. [cite: 137, 138]</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="nazan-story">
-                <h4>Kurucumuz Nazan'ın Hikayesi</h4>
-                <p>Nazan Küçük, 4 çocuk annesi ve bir ilkokul öğretmeni olarak öğrencileri için daha sağlıklı hamur alternatifleri üzerinde çalışmaya başladı. [cite: 59] 10 yıl boyunca tarifini mükemmelleştirdi. [cite: 60] Farklı kokular kullanarak sınıfa aromatik bir alan yarattığını keşfetti. [cite: 65]</p>
-                <p>Nazan, hamurunu duygusal patlama anlarında bir **başa çıkma stratejisi** olarak bile kullandı. [cite: 76] Hamurun neşeli kokularla (muz, bubblegum) zenginleştirilmesi, çocukların duyularını, duygularını ve hafızalarını uyarır. [cite: 74]</p>
-            </div>
-
-            <hr>
-
-            <h4>Pazarlama Kampanyası Hedefleri</h4>
-            <div class="goals-list">
-                <ul>
-                    <li>Sosyal medya etkileşiminde %40 artış.</li>
-                    <li>\#HandsOnScreensOff etiketiyle 10.000+ UGC (Kullanıcı Tarafından Oluşturulan İçerik) gönderisi.</li>
-                    <li>Uygulama kullanıcılarında %20 büyüme.</li>
-                    <li>Influencer hikaye anlatımı videosunun 1 milyon+ görüntülenmeye ulaşması.</li>
-                </ul>
+            <div class="story-card">
+                [cite_start]<h4>Nazan'ın Hikayesi [cite: 58-61]</h4>
+                <p>4 çocuk annesi ve öğretmen Nazan Küçük, öğrencileri için sağlıklı hamur arayışına girdi. 10 yıllık deneme sonucunda nostaljik kokularla (muz, sakız) sınıfını aromatik bir alana çevirdi. Hamurun sadece oyun değil, duygusal bir "sakinleşme aracı" olduğunu keşfetti.</p>
             </div>
         </section>
 
-        <section id="app" class="content-box dark-bg page-section">
-            <h3>Squishables Mobil Uygulaması: Ekran Dışında Bağlı Kalın</h3>
-            <div class="app-details">
-                <div class="app-image">
-                    <img src="app-mockup.png" alt="Mobil Uygulama Ekran Görüntüsü" class="responsive-img">
-                </div>
-                <div class="app-features">
-                    <p>Uygulamamız, çocukların aktif, ekran dışı ve yaratıcı oyunlara katılımını teşvik ederek marka sadakati oluşturmayı amaçlar. Uygulama, uzun vadeli katılım sağlamak için web sitesi ile birlikte çalışır.</p>
+        <section id="app" class="page-section content-box dark-bg">
+            <h3>Squishables Mobil Uygulaması</h3>
+            <div class="grid-layout">
+                <div class="text-side">
+                    <p>Ekran süresini azaltmak için teknolojiyi kullanıyoruz! Uygulamamız oyunun kendisine değil, oyun kurmaya odaklanır.</p>
                     <ul>
-                        <li>**Günlük Ekran Dışı Meydan Okumalar:** Aileler için aktivite zamanlayıcıları ve hatırlatıcılar.</li>
-                        <li>**Ödül Takibi:** Haftalık görevler ve ödüller ile oyunlaştırılmış ekran dışı deneyimler.</li>
-                        <li>**Yarat ve Paylaş:** Çocukların kreasyonlarını uygulama üzerinden paylaşma imkanı.</li>
+                        <li>⏳ <strong>Ekran Dışı Zamanlayıcı:</strong> 30 dakikalık oyun süresi.</li>
+                        <li>🏆 <strong>Ödül Takibi:</strong> Haftalık görevleri tamamla, rozet kazan.</li>
+                        <li>📢 <strong>Meydan Okumalar:</strong> "Bugün hamurdan en sevdiğin yemeği yap."</li>
                     </ul>
+                </div>
+                <div class="image-side placeholder-img app-placeholder">
+                    <p>App Ekran Görüntüsü</p>
                 </div>
             </div>
         </section>
 
-        <section id="analiz" class="content-box page-section">
-            <h3>SWOT Analizi, Rekabet ve İçerik Stratejisi</h3>
-            <div class="swot-grid">
-                <div class="swot-item strengths">
-                    <h4>Güçlü Yönler (STRENGTHS)</h4>
-                    <ul>
-                        <li>%100 organik ve toksik olmayan içerikler. [cite: 304]</li>
-                        <li>CE/EN71/Halal sertifikalı. [cite: 305]</li>
-                        <li>Çok yavaş kuruyan, uzun ömürlü formül. [cite: 306]</li>
-                        <li>Kompostlanabilir - sürdürülebilir marka imajı. [cite: 308]</li>
-                    </ul>
+        <section id="analiz" class="page-section content-box">
+            <h3>SWOT & Strateji</h3>
+            <div class="swot-container">
+                <div class="swot-box strength">
+                    <h4>Güçlü Yönler</h4>
+                    [cite_start]<ul><li>%100 Organik [cite: 21][cite_start]</li><li>Helal & CE Sertifikalı [cite: 24, 35]</li></ul>
                 </div>
-                <div class="swot-item weaknesses">
-                    <h4>Zayıf Yönler (WEAKNESSES)</h4>
-                    <ul>
-                        <li>Yüksek fiyat. [cite: 310]</li>
-                        <li>Yeni bir marka olması. [cite: 311]</li>
-                        <li>Kimyasal içermediği için uygun olmayan ortamlarda bozulma riski. [cite: 312, 314]</li>
-                    </ul>
+                <div class="swot-box weakness">
+                    <h4>Zayıf Yönler</h4>
+                    <ul><li>Yüksek Fiyat</li><li>Doğal olduğu için raf ömrü hassasiyeti</li></ul>
                 </div>
-                <div class="swot-item opportunities">
-                    <h4>Fırsatlar (OPPORTUNITIES)</h4>
-                    <ul>
-                        <li>Ekran bağımlılığı, aileler için büyük bir endişe kaynağıdır. [cite: 316]</li>
-                        <li>Okulların duyusal materyallere olan talebinin artması. [cite: 317, 318]</li>
-                        <li>"Çocuklar için yavaş yaşam / farkındalık" trendi. [cite: 319]</li>
-                    </ul>
-                </div>
-                <div class="swot-item threats">
-                    <h4>Tehditler (THREATS)</h4>
-                    <ul>
-                        <li>Ucuz ürünlerle rekabet ve aile bütçesi kısıtlamaları. [cite: 321, 323]</li>
-                        <li>**Büyük Rakip Markalar:** Playdoh, Mamma Comica, Let’s, Adel, ChildGen gibi büyük rakipler. [cite: 127, 128, 129, 130, 131]</li>
-                    </ul>
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="content-strategy">
-                <h4>ASMR İçeriği ve Eğitimsel Amaç (TikTok)</h4>
-                <p>TikTok kanalımızdaki ASMR videoları (ürün sıkma ve yoğurma), hamurun sakinleştirici ve duyusal düzenlemeye yardımcı olma faydalarını vurgulayarak, pasif ekran kullanımını azaltmayı hedefler. Bu, dokunsal deneyimin görsel bir gösterimidir.</p>
-
-                <h4>Etkili PR ve İşbirlikleri Planı</h4>
-                <p>Kampanyamız Aslı Enver ve Psk. Aslı Afşaroğlu gibi figürleri içermektedir. Aslı Enver ile olan PR paketi akışı netleştirilmiş, Psk. Aslı Afşaroğlu'nun uzmanlığının teyit edilmesi gerektiği belirtilmiştir.</p>
-            </div>
-        </section>
-
-        <section id="demo" class="content-box demo-section page-section">
-            <h3>Hesap Oluşturma ve Sipariş Akışı Demo (Statik Maket)</h3>
-            <p>Bu bölüm, sipariş vermenin ne kadar kolay olduğunu gösteren statik arayüz maketlerini içerir. **(Gerçek data toplamaz, sembolik bir gösterimdir.)**</p>
-            
-            <div class="demo-steps">
-                <h4>Adım 1: Hesap Oluşturma / Giriş Yapma</h4>
-                <img src="signup-screen.png" alt="Hesap Oluşturma Ekranı Maketi" class="responsive-img">
-                <p>Yeni kullanıcılar için hızlı ve minimalist hesap oluşturma formu, mevcut kullanıcılar için kolay giriş imkanı sunulur.</p>
-            </div>
-
-            <div class="demo-steps">
-                <h4>Adım 2: Ürün Sepetine Ekleme</h4>
-                <img src="add-to-cart-screen.png" alt="Sepete Ekleme Ekranı Maketi" class="responsive-img">
-                <p>Kullanıcı, MoodMakers Kit ürün sayfasından ürünü tek tıkla sepetine ekler. Kampanya fiyatları net olarak gösterilir.</p>
-            </div>
-
-            <div class="demo-steps">
-                <h4>Adım 3: Ödeme Sayfası (Mockup)</h4>
-                <img src="checkout-mockup.png" alt="Ödeme Sayfası Maketi" class="responsive-img">
-                <p>Adres ve ödeme bilgileri temiz bir arayüzde doldurulur. Tüm süreç tek sayfada tamamlanarak ödeme deneyimi optimize edilir.</p>
             </div>
         </section>
 
     </main>
 
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="modal-header">
+                <h2>Aramıza Katılın!</h2>
+                <p>Sipariş vermek veya demo hesabı oluşturmak için bilgilerinizi girin.</p>
+            </div>
+            <form class="demo-form">
+                <label>Adınız Soyadınız</label>
+                <input type="text" placeholder="Örn: Nazan Küçük" required>
+                
+                <label>E-posta Adresi</label>
+                <input type="email" placeholder="ornek@mail.com" required>
+                
+                <label>Şifre Belirleyin</label>
+                <input type="password" placeholder="******" required>
+
+                <label>Teslimat Adresi (Sipariş için)</label>
+                <textarea placeholder="Mahalle, Cadde, No..."></textarea>
+                
+                <button type="button" class="submit-btn" onclick="alert('Tebrikler! Demo kaydınız ve siparişiniz alındı simülasyonu başarılı.')">Kaydı Tamamla & Sipariş Ver</button>
+            </form>
+            <p class="note">*Bu bir demodur, gerçek veri toplamaz.</p>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2025 Squishables. İletişim: squishables@info.com.tr</p>
+        [cite_start]<p>&copy; 2025 Squishables. Soft as a Hug. [cite: 10]</p>
     </footer>
 
     <script src="script.js"></script>
