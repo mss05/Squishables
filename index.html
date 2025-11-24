@@ -3,133 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squishables | Hands On, Screens Off.</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Squishables | Hands On, Screens Off</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="logo.png" alt="Squishables" class="logo"> 
-            <h1>Squishables</h1>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/logo.png" alt="Squishables Logo">
+            <span>Squishables</span>
         </div>
-        <nav id="main-nav">
-            <a href="#" data-page="hero" class="nav-link active">Anasayfa</a>
-            <a href="#" data-page="urunler" class="nav-link">MoodMakers Kit</a>
-            <a href="#" data-page="misyon" class="nav-link">Misyon & Hikaye</a>
-            <a href="#" data-page="app" class="nav-link">Mobil Uygulama</a>
-            <a href="#" data-page="analiz" class="nav-link">Analiz</a>
-            <a href="#" id="nav-signup-btn" class="nav-link highlight-btn">Üye Ol / Sipariş Ver</a>
-        </nav>
+        <ul class="nav-links">
+            <li><a href="#home">Ana Sayfa</a></li>
+            <li><a href="#features">Neden Biz?</a></li>
+            <li><a href="#products">Ürünler</a></li>
+            <li><a href="#contact" class="btn-nav">İletişime Geç</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hands On, <br> <span class="highlight">Screens Off.</span></h1>
+            <p>Çocukların hayal gücünü ekrandan uzaklaştırıp parmak uçlarına taşıyoruz. Doğal, güvenli ve %100 eğlenceli.</p>
+            <a href="#products" class="btn-main">Keşfetmeye Başla</a>
+        </div>
+        <div class="hero-image">
+            <img src="assets/hero-bg.jpg" alt="Mutlu Çocuklar Oyun Hamuru Oynuyor">
+        </div>
     </header>
 
-    <main>
-        <section id="hero" class="page-section active"> 
-            <div class="hero-content">
-                <p class="slogan">Hands On, Screens Off.</p>
-                <h2>Doğal Duyusal Oyun ile Yaratıcılığı Ateşleyin.</h2>
-                <p class="sub-text">Soft as a Hug, Kind to the Earth!</p>
-                <button class="cta-button trigger-popup">MoodMakers Kiti'ni İncele & Al</button>
+    <section id="features" class="features">
+        <h2>Neden Squishables?</h2>
+        <div class="feature-cards">
+            <div class="card">
+                <div class="icon">🌱</div>
+                <h3>%100 Doğal</h3>
+                <p>Tamamen gıda sınıfı malzemelerden üretilmiştir. Güvenle oynayın.</p>
             </div>
-        </section>
-        
-        <section id="urunler" class="page-section content-box"> 
-            <h3>MoodMakers Family Bonding Sensory Kit</h3>
-            <div class="grid-layout">
-                <div class="text-side">
-                    <p>MoodMakers kiti, sanatsal terapi ve duyusal oyunu birleştirerek ailenizle her gün 30 dakika boyunca sakin ritüeller oluşturmanızı sağlar.</p>
-                    <h4>Kutu İçeriği:</h4>
-                    <ul>
-                        <li>🎨 <strong>6 Farklı Doku & Koku:</strong> Muz, Sakız gibi neşeli ve nostaljik kokular.</li>
-                        <li>🌿 <strong>%100 Doğal İçerik:</strong> Buğday unu, deniz tuzu, organik krem tartar ve gıda boyaları.</li>
-                        <li>💌 <strong>Bağ Kurma Kartları:</strong> Aile içi iletişimi başlatan özel sorular.</li>
-                    </ul>
-                    <button class="cta-button small trigger-popup">Sepete Ekle - 450₺</button>
-                </div>
-                <div class="image-side">
-                    <img src="product-kit.jpg" alt="Ürün Görseli" style="max-width:100%; border-radius:10px;">
-                </div>
+            <div class="card">
+                <div class="icon">🧠</div>
+                <h3>Duyusal Gelişim</h3>
+                <p>Motor becerileri geliştirir ve yaratıcılığı tetikler.</p>
             </div>
-        </section>
-
-        <section id="misyon" class="page-section content-box">
-            <h3>Misyonumuz ve Kurucumuzun Hikayesi</h3>
-            <p><strong>Vizyon:</strong> Çocukların ellerine renk, yaratıcılık ve özen getirmek. Toksik olmayan, yenebilir içeriklerle güvenli oyun sunmak.</p>
-            
-            <div class="story-card">
-                <h4>Nazan'ın Hikayesi</h4>
-                <p>4 çocuk annesi ve öğretmen Nazan Küçük, öğrencileri için sağlıklı hamur arayışına girdi. 10 yıllık deneme sonucunda nostaljik kokularla sınıfını aromatik bir alana çevirdi. Hamurun sadece oyun değil, duygusal bir "sakinleşme aracı" olduğunu keşfetti. Şimdi bu şifalı deneyimi tüm çocuklarla paylaşıyor.</p>
+            <div class="card">
+                <div class="icon">📵</div>
+                <h3>Ekran Detoksu</h3>
+                <p>Tabletleri bırakın, hamurları sıkın! Gerçek oyun deneyimi.</p>
             </div>
-        </section>
-
-        <section id="app" class="page-section content-box dark-bg">
-            <h3>Squishables Mobil Uygulaması</h3>
-            <div class="grid-layout">
-                <div class="text-side">
-                    <p>Ekran süresini azaltmak için teknolojiyi kullanıyoruz! Uygulamamız oyunun kendisine değil, oyun kurmaya odaklanır.</p>
-                    <ul>
-                        <li>⏳ <strong>Ekran Dışı Zamanlayıcı:</strong> 30 dakikalık oyun süresi ayarla.</li>
-                        <li>🏆 <strong>Ödül Takibi:</strong> Haftalık ekran dışı görevleri tamamla, rozet kazan.</li>
-                        <li>📢 <strong>Meydan Okumalar:</strong> "Bugün hamurdan en sevdiğin yemeği yap" gibi günlük görevler.</li>
-                    </ul>
-                </div>
-                <div class="image-side">
-                    <img src="app-mockup.png" alt="App Görseli" style="max-width:100%; border-radius:10px;">
-                </div>
-            </div>
-        </section>
-
-        <section id="analiz" class="page-section content-box">
-            <h3>Güçlü ve Zayıf Yönlerimiz (SWOT)</h3>
-            <div class="swot-container">
-                <div class="swot-box strength">
-                    <h4>Güçlü Yönler</h4>
-                    <ul>
-                        <li>%100 Organik ve Güvenli</li>
-                        <li>Helal & CE Sertifikalı</li>
-                        <li>Sürdürülebilir Marka İmajı</li>
-                    </ul>
-                </div>
-                <div class="swot-box weakness">
-                    <h4>Zayıf Yönler</h4>
-                    <ul>
-                        <li>Pazara göre Yüksek Fiyat</li>
-                        <li>Doğal olduğu için raf ömrü hassasiyeti</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div class="modal-header">
-                <h2>Aramıza Katılın!</h2>
-                <p>Sipariş vermek veya demo hesabı oluşturmak için bilgilerinizi girin.</p>
-            </div>
-            <form class="demo-form">
-                <label>Adınız Soyadınız</label>
-                <input type="text" placeholder="Örn: Nazan Küçük" required>
-                
-                <label>E-posta Adresi</label>
-                <input type="email" placeholder="ornek@mail.com" required>
-                
-                <label>Şifre Belirleyin</label>
-                <input type="password" placeholder="******" required>
-
-                <label>Teslimat Adresi (Sipariş için)</label>
-                <textarea placeholder="Mahalle, Cadde, No..."></textarea>
-                
-                <button type="button" class="submit-btn" onclick="alert('Tebrikler! Kaydınız alındı ve siparişiniz simüle edildi.')">Kaydı Tamamla & Sipariş Ver</button>
-            </form>
-            <p class="note">*Bu bir demodur, gerçek veri toplamaz.</p>
         </div>
-    </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 Squishables. Soft as a Hug.</p>
+    <section id="products" class="products">
+        <h2>Favori Setlerimiz</h2>
+        <div class="product-grid">
+            <div class="product-item">
+                <img src="assets/product-1.jpg" alt="Squishables Başlangıç Seti">
+                <h3>Başlangıç Kiti</h3>
+                <p>3 Farklı Renk + 2 Kalıp</p>
+                <span class="price">₺450</span>
+                <button class="btn-buy">Sepete Ekle</button>
+            </div>
+            </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>Squishables</h3>
+            <p>Hayal gücüne dokun.</p>
+            <div class="socials">
+                <a href="#">Instagram</a>
+                <a href="#">GitHub</a>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2025 Squishables. Tüm hakları saklıdır.</p>
     </footer>
 
     <script src="script.js"></script>
