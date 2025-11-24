@@ -2,59 +2,66 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Squishables | Uygulama</title>
+    <title>Squishables | Uygulama & Guide</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <div class="container">
             <nav>
                 <a href="index.html" class="logo"><img src="logo.png" alt="Logo"> Squishables</a>
                 <ul class="nav-links">
                     <li><a href="index.html">Ana Sayfa</a></li>
-                    <li><a href="app.html" class="active">Uygulama</a></li>
+                    <li><a href="app.html" style="color:var(--primary)">Uygulama</a></li>
                     <li><a href="products.html">Ürünler</a></li>
-                    <li><a href="guide.html">Rehber</a></li>
-                    <li><a href="#" class="btn-nav">Giriş Yap</a></li>
+                    <li><a href="guide.html">Rehber</a></li> <li><button class="btn-outline" onclick="toggleLogin()">Giriş Yap</button></li>
+                    <li class="cart-btn-wrap" onclick="toggleCart()">🛒 <span id="cart-count" class="badge">0</span></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="container" style="padding: 60px 0;">
+    <div class="container">
+        
         <div class="app-feature">
-            <div class="app-text">
-                <h2>Squishables App Yayında!</h2>
-                <p>Oyun hamuru setinizle ne yapacağınızı bilmiyor musunuz? Uygulamayı açın, hikayeyi seçin ve maceraya başlayın.</p>
-                <ul style="margin: 20px 0; list-style: none;">
-                    <li>✅ 500+ Şekil Rehberi</li>
-                    <li>✅ İnteraktif Hikayeler</li>
-                    <li>✅ Ebeveyn Kontrol Paneli</li>
-                </ul>
-                <button class="btn-cta" style="background: black;">App Store'dan İndir</button>
+            <div class="hero-text">
+                <h1>Squishables App</h1>
+                <p>Oyun hamuru setinizle ne yapacağınızı bilmiyor musunuz? Uygulamamızdaki 500+ figürü keşfedin.</p>
+                <button class="btn-cta" style="background:black;">App Store'dan İndir</button>
             </div>
             <div class="hero-media">
-                <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80" alt="App Ekranı">
+                <img src="app_mockup.jpg" alt="App Ekranı">
             </div>
         </div>
 
         <div class="app-feature reverse">
-            <div class="app-text">
-                <h2>Adım Adım Kılavuzlar</h2>
-                <p>Tıpkı LEGO birleştirir gibi! Uygulamamızdaki "Adım Adım" modu ile çocuklar karmaşık şekilleri tek başlarına yapabilirler.</p>
+            <div class="hero-text">
+                <h1>Adım Adım Yapım</h1>
+                <p>Tıpkı LEGO birleştirir gibi! Çocuklar "Dinozor Yapımı" adımlarını takip ederek kendi başlarına oynayabilirler.</p>
+                <button class="btn-outline" onclick="downloadGuide('guide1.jpg')">Bu Kılavuzu İndir (JPG)</button>
             </div>
             <div class="hero-media">
-                <img src="guide.jpg" alt="Lego Tarzı Kılavuz" style="border: 2px solid #eee;">
+                <img src="guide1.jpg" alt="Lego Guide">
             </div>
         </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Squishables.</p>
+    </div>
+
+    <div id="cartSidebar" class="cart-sidebar">
+        <h3>Sepetim <span onclick="toggleCart()" style="float:right; cursor:pointer">&times;</span></h3>
+        <div id="cart-items" style="flex:1; margin-top:20px;"></div>
+        <h4 id="cart-total">Toplam: ₺0</h4>
+        <button class="btn-cta" style="width:100%; margin-top:10px;">Öde</button>
+    </div>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span onclick="toggleLogin()" style="position:absolute; right:20px; top:10px; cursor:pointer;">&times;</span>
+            <h2>Giriş Yap</h2>
+            <input class="input-group" placeholder="E-posta"><input class="input-group" type="password" placeholder="Şifre">
+            <button class="btn-cta">Giriş</button>
         </div>
-    </footer>
+    </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
