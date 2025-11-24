@@ -1,95 +1,87 @@
-// ÜRÜN LİSTESİ (Burayı Sunumdaki Ürün Adlarına Göre Düzenle)
-const productsDB = [
-    { id: 1, name: "Squishables Başlangıç Kiti", price: 450, image: "product1.jpg" },
-    { id: 2, name: "Orman Maceraları Seti", price: 550, image: "product2.jpg" },
-    { id: 3, name: "Uzay Kaşifi Seti", price: 600, image: "product3.jpg" }
+// script.js
+
+// Ürün Listesi
+const products = [
+    { id: 1, name: "Squishables Başlangıç Kiti", price: 450, img: "product1.jpg" },
+    { id: 2, name: "Orman Maceraları Seti", price: 550, img: "product2.jpg" },
+    { id: 3, name: "Uzay Kaşifi Seti", price: 600, img: "product3.jpg" }
 ];
 
-// SEPET SİSTEMİ (Sayfa yenilense de gitmez)
+// Sepeti Hafızadan Çek
 let cart = JSON.parse(localStorage.getItem('squishCart')) || [];
 
+// Sayfa Yüklenince Çalışacaklar
 document.addEventListener('DOMContentLoaded', () => {
-    updateCartIcon();
-    renderCartContents();
+    updateCartCount();
+    renderCart();
 });
 
-// Sepete Ekleme Fonksiyonu
-function addToCart(productId) {
-    const product = productsDB.find(p => p.id === productId);
-    cart.push(product);
-    localStorage.setItem('squishCart', JSON.stringify(cart)); // Hafızaya al
-    updateCartIcon();
-    renderCartContents();
-    toggleCart(true); // Sepeti aç
+// Sepete Ekle
+function addToCart(id) {
+    const item = products.find(p => p.id === id);
+    cart.push(item);
+    saveCart();
+    renderCart();
+    toggleCart(); // Sepeti aç
 }
 
-// Sepeti Güncelle
-function updateCartIcon() {
-    const badge = document.getElementById('cart-count');
-    if(badge) badge.innerText = cart.length;
+// Sepetten Sil
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    saveCart();
+    renderCart();
 }
 
-// Sepet İçeriğini Ekrana Basma
-function renderCartContents() {
-    const cartContainer = document.getElementById('cart-items-container');
-    const totalElement = document.getElementById('cart-total');
-    
-    if (!cartContainer) return;
+// Sepeti Kaydet (Sayfa yenilense de gitmesin)
+function saveCart() {
+    localStorage.setItem('squishCart', JSON.stringify(cart));
+    updateCartCount();
+}
 
-    cartContainer.innerHTML = "";
-    let totalPrice = 0;
+// Sepeti Ekrana Bas
+function renderCart() {
+    const container = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
+    if (!container) return;
+
+    container.innerHTML = '';
+    let total = 0;
 
     if (cart.length === 0) {
-        cartContainer.innerHTML = "<p style='text-align:center; margin-top:20px;'>Sepetiniz boş.</p>";
+        container.innerHTML = '<p>Sepet boş.</p>';
     } else {
         cart.forEach((item, index) => {
-            totalPrice += item.price;
-            cartContainer.innerHTML += `
+            total += item.price;
+            container.innerHTML += `
                 <div class="cart-item">
-                    <div class="item-info">
-                        <h4>${item.name}</h4>
-                        <span>₺${item.price}</span>
-                    </div>
-                    <button onclick="removeFromCart(${index})" class="btn-remove">Sil</button>
+                    <div><b>${item.name}</b><br>₺${item.price}</div>
+                    <button onclick="removeFromCart(${index})" style="color:red; border:none; background:none; cursor:pointer;">Sil</button>
                 </div>
             `;
         });
     }
-
-    if(totalElement) totalElement.innerText = `Toplam: ₺${totalPrice}`;
+    if (totalEl) totalEl.innerText = `Toplam: ₺${total}`;
 }
 
-// Sepetten Silme
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    localStorage.setItem('squishCart', JSON.stringify(cart));
-    updateCartIcon();
-    renderCartContents();
+function updateCartCount() {
+    const badge = document.getElementById('cart-count');
+    if (badge) badge.innerText = cart.length;
 }
 
-// Sepet Aç/Kapa
-function toggleCart(forceOpen = false) {
-    const sidebar = document.getElementById('cartSidebar');
-    if (forceOpen) {
-        sidebar.classList.add('active');
-    } else {
-        sidebar.classList.toggle('active');
-    }
+// Menü ve Modal Fonksiyonları
+function toggleCart() {
+    document.getElementById('cartSidebar').classList.toggle('active');
 }
-
-// Login Modal Aç/Kapa
 function toggleLogin() {
     const modal = document.getElementById('loginModal');
     modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
 }
-
-// Guide İndirme Fonksiyonu
-function downloadGuide(fileName) {
+function downloadGuide(filename) {
     const link = document.createElement('a');
-    link.href = fileName; // İndirilecek dosyanın adı
-    link.download = fileName; // İndirme emri
+    link.href = filename;
+    link.download = filename;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    alert("Rehber cihazınıza indiriliyor...");
+    alert('Rehber cihazınıza iniyor...');
 }
