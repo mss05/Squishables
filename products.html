@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <div class="container">
             <nav>
@@ -15,64 +14,50 @@
                     <li><a href="index.html">Ana Sayfa</a></li>
                     <li><a href="app.html">Uygulama</a></li>
                     <li><a href="products.html" style="color:var(--primary)">Ürünler</a></li>
-                    <li><a href="guide.html">Rehberler</a></li>
+                    <li><a href="guide.html">Rehber</a></li>
                     <li><button class="btn-outline" onclick="toggleLogin()">Giriş Yap</button></li>
-                    <li class="cart-btn-wrap" onclick="toggleCart()">
-                        🛒 <span id="cart-count" class="badge">0</span>
-                    </li>
+                    <li class="cart-btn-wrap" onclick="toggleCart()">🛒 <span id="cart-count" class="badge">0</span></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <div class="container">
-        <h2 style="text-align:center; margin-top:40px; font-family:'Fredoka'; color:var(--secondary);">Mağaza</h2>
-        
+        <h2 style="text-align:center; margin-top:40px; font-family:'Fredoka'; color:var(--secondary);">Tüm Setlerimiz</h2>
         <div class="grid-3">
             <div class="card">
                 <img src="product1.jpg" alt="Ürün 1">
-                <h3>Squishables Başlangıç Kiti</h3>
-                <p class="price">₺450</p>
-                <button class="btn-primary" onclick="addToCart(1)">Sepete Ekle</button>
+                <h3>Başlangıç Kiti</h3>
+                <span class="price">₺450</span>
+                <button class="btn-cta" onclick="addToCart(1)">Sepete Ekle</button>
             </div>
-
             <div class="card">
                 <img src="product2.jpg" alt="Ürün 2">
-                <h3>Orman Maceraları Seti</h3>
-                <p class="price">₺550</p>
-                <button class="btn-primary" onclick="addToCart(2)">Sepete Ekle</button>
+                <h3>Orman Maceraları</h3>
+                <span class="price">₺550</span>
+                <button class="btn-cta" onclick="addToCart(2)">Sepete Ekle</button>
             </div>
-
             <div class="card">
                 <img src="product3.jpg" alt="Ürün 3">
-                <h3>Uzay Kaşifi Seti</h3>
-                <p class="price">₺600</p>
-                <button class="btn-primary" onclick="addToCart(3)">Sepete Ekle</button>
+                <h3>Uzay Kaşifi</h3>
+                <span class="price">₺600</span>
+                <button class="btn-cta" onclick="addToCart(3)">Sepete Ekle</button>
             </div>
         </div>
     </div>
 
     <div id="cartSidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Sepetim</h3>
-            <span onclick="toggleCart()" style="cursor:pointer; font-size:1.5rem;">&times;</span>
-        </div>
-        <div id="cart-items-container" style="flex:1; overflow-y:auto;">
-            </div>
-        <div style="border-top:1px solid #eee; padding-top:10px;">
-            <h4 id="cart-total" style="text-align:right; margin-bottom:10px;">Toplam: ₺0</h4>
-            <button class="checkout-btn">Ödemeyi Tamamla</button>
-        </div>
+        <h3>Sepetim <span onclick="toggleCart()" style="float:right; cursor:pointer">&times;</span></h3>
+        <div id="cart-items" style="flex:1; margin-top:20px;"></div>
+        <h4 id="cart-total">Toplam: ₺0</h4>
+        <button class="btn-cta" style="width:100%; margin-top:10px;">Öde</button>
     </div>
-
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span onclick="toggleLogin()" style="position:absolute; right:20px; top:10px; cursor:pointer; font-size:1.5rem;">&times;</span>
-            <h2 style="font-family:'Fredoka'; color:var(--secondary);">Giriş Yap</h2>
-            <input type="email" placeholder="E-posta" class="input-group">
-            <input type="password" placeholder="Şifre" class="input-group">
-            <button class="btn-primary" style="width:100%; margin-top:10px;">Giriş</button>
-            <p style="margin-top:15px; font-size:0.9rem;">Hesabın yok mu? <a href="#" style="color:var(--primary)">Kayıt Ol</a></p>
+            <span onclick="toggleLogin()" style="position:absolute; right:20px; top:10px; cursor:pointer;">&times;</span>
+            <h2>Giriş Yap</h2>
+            <input class="input-group" placeholder="E-posta"><input class="input-group" type="password" placeholder="Şifre">
+            <button class="btn-cta">Giriş</button>
         </div>
     </div>
 
