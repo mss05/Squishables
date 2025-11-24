@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Squishables | Rehberler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo"><img src="logo.png" alt="Logo"> Squishables</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="app.html">Uygulama</a></li>
+                    <li><a href="products.html">Ürünler</a></li>
+                    <li><a href="guide.html" style="color:var(--primary)">Rehberler</a></li>
+                    <li><button class="btn-outline" onclick="toggleLogin()">Giriş Yap</button></li>
+                    <li class="cart-btn-wrap" onclick="toggleCart()">🛒 <span id="cart-count" class="badge">0</span></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container" style="padding:40px 0;">
+        <h2 style="text-align:center; font-family:'Fredoka'; color:var(--secondary); font-size:2.5rem;">Ebeveyn & Çocuk Rehberleri</h2>
+        <p style="text-align:center; color:#666;">Setlerinizden en iyi şekilde yararlanmak için kılavuzları indirin.</p>
+
+        <div class="grid-3">
+            <div class="card">
+                <div style="font-size:3rem; margin-bottom:10px;">🦕</div> <h3>Hayvanlar Alemi</h3>
+                <p>Adım adım 20 farklı hayvan yapımı.</p>
+                <button class="btn-primary" style="margin-top:15px;" onclick="downloadGuide('guide1.jpg')">📥 İndir (JPG)</button>
+            </div>
+
+            <div class="card">
+                <div style="font-size:3rem; margin-bottom:10px;">🚀</div>
+                <h3>Uzay Araçları</h3>
+                <p>Roket ve gezegen yapım kılavuzu.</p>
+                <button class="btn-primary" style="margin-top:15px;" onclick="downloadGuide('guide2.jpg')">📥 İndir (JPG)</button>
+            </div>
+
+            <div class="card">
+                <div style="font-size:3rem; margin-bottom:10px;">🧠</div>
+                <h3>Ebeveyn Gelişim Notları</h3>
+                <p>Duyusal oyunun çocuklara faydaları.</p>
+                <button class="btn-primary" style="margin-top:15px; background-color:#333;" onclick="downloadGuide('guide3.jpg')">📄 İndir (PDF)</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartSidebar" class="cart-sidebar">
+        <div class="cart-header"><h3>Sepetim</h3><span onclick="toggleCart()" style="cursor:pointer;">&times;</span></div>
+        <div id="cart-items-container"></div>
+        <div style="margin-top:auto;"><h4 id="cart-total">Toplam: ₺0</h4><button class="checkout-btn">Öde</button></div>
+    </div>
+    
+    <div id="loginModal" class="modal">
+        <div class="modal-content"><span onclick="toggleLogin()" class="close-btn">&times;</span><h2>Giriş</h2><input class="input-group"><input class="input-group"><button class="btn-primary">Giriş</button></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
