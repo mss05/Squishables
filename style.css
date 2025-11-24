@@ -1,79 +1,254 @@
-/* Temel Ayarlar */
-body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #FFFDF5; color: #5D4037; }
-h1, h2, h3, h4 { color: #5D4037; }
-
-/* Pastel Renkler */
+/* --- BRAND GUIDELINES (CSS Variables) --- */
 :root {
-    --pink: #FFC9C9;
-    --yellow: #FFF59D;
-    --green: #A8E6CF;
-    --brown: #5D4037;
+    --primary-color: #FF8C42; /* Canlı Turuncu */
+    --secondary-color: #6C63FF; /* Yumuşak Mor */
+    --accent-color: #FFD93D; /* Sarı */
+    --text-color: #2D2D2D;
+    --bg-color: #F9F9F9;
+    --white: #ffffff;
+    --font-heading: 'Fredoka', sans-serif; /* Yuvarlak, çocuksu font */
+    --font-body: 'Nunito', sans-serif;
 }
 
-/* Header */
-header { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-.logo-container { display: flex; align-items: center; gap: 20px; }
-.logo { height: 50px; } /* Logo yoksa bozulmaz */
-nav a { text-decoration: none; color: var(--brown); margin-left: 20px; font-weight: 600; cursor: pointer; }
-.nav-link.active { border-bottom: 3px solid var(--pink); }
-.highlight-btn { background: var(--green); padding: 8px 15px; border-radius: 20px; transition: 0.3s; }
-.highlight-btn:hover { background: #81c7a6; }
-
-/* Sayfa Yapısı */
-.page-section { display: none; padding: 40px 10%; animation: fadeIn 0.5s; min-height: 80vh; }
-.page-section.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Hero Bölümü */
-#hero { text-align: center; background: var(--yellow); padding-top: 100px; }
-.slogan { font-size: 3em; font-weight: bold; margin: 0; color: var(--brown); }
-.cta-button { background: var(--pink); color: var(--brown); border: none; padding: 15px 30px; font-size: 1.1em; font-weight: bold; border-radius: 30px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-.cta-button:hover { transform: scale(1.05); }
-
-/* İçerik Kutuları */
-.content-box { background: white; margin-bottom: 20px; border-radius: 15px; padding: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-.grid-layout { display: flex; gap: 30px; align-items: center; margin-top: 20px; }
-.text-side { flex: 1; }
-.image-side { flex: 1; height: 300px; background: #eee; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #888; }
-.dark-bg { background: var(--green); }
-
-/* SWOT */
-.swot-container { display: flex; gap: 20px; }
-.swot-box { flex: 1; padding: 20px; border-radius: 10px; background: #f9f9f9; }
-.strength { border-left: 5px solid var(--green); }
-.weakness { border-left: 5px solid var(--pink); }
-
-/* 🔥 POPUP (MODAL) STİLLERİ - İŞTE BURASI 🔥 */
-.modal {
-    display: none; /* Başlangıçta gizli */
-    position: fixed; 
-    z-index: 1000; 
-    left: 0; top: 0; 
-    width: 100%; height: 100%; 
-    background-color: rgba(0,0,0,0.5); /* Arka plan karartma */
-    backdrop-filter: blur(5px); /* Arkaya bulanıklık efekti */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.modal-content {
-    background-color: white;
-    margin: 5% auto; 
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- NAVIGATION --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.btn-nav {
+    background-color: var(--secondary-color);
+    color: var(--white) !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 5%;
+    min-height: 80vh;
+    background: linear-gradient(135deg, #FFF6E5 0%, #FFFFFF 100%);
+}
+
+.hero-content {
+    flex: 1;
+    padding-right: 50px;
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.btn-main {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 15px 35px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+    box-shadow: 0 5px 15px rgba(255, 140, 66, 0.3);
+}
+
+.btn-main:hover {
+    transform: scale(1.05);
+}
+
+.hero-image {
+    flex: 1;
+}
+
+.hero-image img {
+    width: 100%;
+    border-radius: 20px; /* Köşeleri yumuşattık */
+    box-shadow: 20px 20px 0px var(--accent-color); /* Arkaya grafik gölge */
+}
+
+/* --- FEATURES --- */
+.features {
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.features h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: var(--secondary-color);
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: var(--white);
     padding: 30px;
     border-radius: 20px;
-    width: 90%; 
-    max-width: 450px; /* Çok geniş olmasın */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    position: relative;
-    animation: slideDown 0.4s;
+    flex: 1;
+    min-width: 250px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
 }
 
-@keyframes slideDown { from { top: -50px; opacity: 0; } to { top: 0; opacity: 1; } }
+.card:hover {
+    transform: translateY(-10px);
+}
 
-.close-btn { float: right; font-size: 28px; font-weight: bold; cursor: pointer; color: #aaa; }
-.close-btn:hover { color: black; }
+.icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
 
-.demo-form label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9em; }
-.demo-form input, .demo-form textarea { width: 100%; padding: 10px; margin-top: 5px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
-.demo-form input:focus { border-color: var(--pink); outline: none; }
-.submit-btn { width: 100%; background: var(--brown); color: white; padding: 15px; border: none; border-radius: 10px; font-size: 1em; margin-top: 20px; cursor: pointer; font-weight: bold; }
-.submit-btn:hover { background: #3e2b24; }
-.note { font-size: 0.8em; color: #888; text-align: center; margin-top: 15px; }
+/* --- PRODUCTS --- */
+.products {
+    padding: 80px 5%;
+    background-color: #F0F4F8;
+}
+
+.products h2 {
+    text-align: center;
+    font-family: var(--font-heading);
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
+
+.product-grid {
+    display: flex;
+    justify-content: center;
+}
+
+.product-item {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 350px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-item img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.price {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.btn-buy {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: var(--text-color);
+    color: var(--white);
+    padding: 50px 5%;
+    text-align: center;
+}
+
+footer a {
+    color: var(--primary-color);
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    .nav-links {
+        display: none; /* Mobilde menüyü gizle (JS ile açacağız) */
+    }
+}
