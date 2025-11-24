@@ -4,14 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squishables | Hands On, Screens Off</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- BURASI STİL (CSS) KISMI --- */
+        :root {
+            --primary-color: #FF8C42; /* Turuncu */
+            --secondary-color: #6C63FF; /* Mor */
+            --accent-color: #FFD93D; /* Sarı */
+            --text-color: #2D2D2D;
+            --bg-color: #F9F9F9;
+            --white: #ffffff;
+            --font-heading: 'Fredoka', sans-serif;
+            --font-body: 'Nunito', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigasyon */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 100;
+        }
+
+        .logo {
+            display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-heading); font-size: 1.5rem;
+            color: var(--secondary-color); font-weight: 600;
+        }
+        .logo img { height: 40px; }
+
+        .nav-links { list-style: none; display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 700; }
+        .nav-links a:hover { color: var(--primary-color); }
+        .btn-nav { background-color: var(--secondary-color); color: var(--white) !important; padding: 10px 20px; border-radius: 25px; }
+
+        /* Hero */
+        .hero {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 50px 5%; min-height: 80vh;
+            background: linear-gradient(135deg, #FFF6E5 0%, #FFFFFF 100%);
+        }
+        .hero-content { flex: 1; padding-right: 50px; }
+        .hero h1 { font-family: var(--font-heading); font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+        .highlight { color: var(--primary-color); }
+        .btn-main {
+            display: inline-block; background-color: var(--primary-color); color: var(--white);
+            padding: 15px 35px; border-radius: 30px; text-decoration: none; font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 140, 66, 0.3); transition: transform 0.2s;
+        }
+        .btn-main:hover { transform: scale(1.05); }
+        .hero-image { flex: 1; }
+        .hero-image img {
+            width: 100%; border-radius: 20px;
+            box-shadow: 20px 20px 0px var(--accent-color);
+        }
+
+        /* Özellikler */
+        .features { padding: 80px 5%; text-align: center; }
+        .features h2 { font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 50px; color: var(--secondary-color); }
+        .feature-cards { display: flex; justify-content: space-around; gap: 20px; flex-wrap: wrap; }
+        .card { background: var(--white); padding: 30px; border-radius: 20px; flex: 1; min-width: 250px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .icon { font-size: 3rem; margin-bottom: 20px; }
+
+        /* Ürünler */
+        .products { padding: 80px 5%; background-color: #F0F4F8; }
+        .products h2 { text-align: center; font-family: var(--font-heading); margin-bottom: 40px; font-size: 2.5rem; }
+        .product-grid { display: flex; justify-content: center; }
+        .product-item { background: var(--white); padding: 20px; border-radius: 20px; text-align: center; max-width: 350px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .product-item img { width: 100%; border-radius: 15px; margin-bottom: 20px; }
+        .price { display: block; font-size: 1.5rem; color: var(--primary-color); font-weight: bold; margin: 15px 0; }
+        .btn-buy { background-color: var(--secondary-color); color: white; border: none; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-size: 1rem; }
+
+        /* Footer */
+        footer { background-color: var(--text-color); color: var(--white); padding: 50px 5%; text-align: center; }
+        
+        /* Mobil Uyumluluk */
+        @media screen and (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-content { padding-right: 0; margin-bottom: 40px; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
 
     <nav class="navbar">
         <div class="logo">
-            <img src="assets/logo.png" alt="Squishables Logo">
+            <img src="logo.png" alt="Squishables Logo"> 
             <span>Squishables</span>
         </div>
         <ul class="nav-links">
@@ -20,11 +112,6 @@
             <li><a href="#products">Ürünler</a></li>
             <li><a href="#contact" class="btn-nav">İletişime Geç</a></li>
         </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
     </nav>
 
     <header id="home" class="hero">
@@ -34,7 +121,7 @@
             <a href="#products" class="btn-main">Keşfetmeye Başla</a>
         </div>
         <div class="hero-image">
-            <img src="assets/hero-bg.jpg" alt="Mutlu Çocuklar Oyun Hamuru Oynuyor">
+            <img src="hero.jpg" alt="Mutlu Çocuklar">
         </div>
     </header>
 
@@ -44,7 +131,7 @@
             <div class="card">
                 <div class="icon">🌱</div>
                 <h3>%100 Doğal</h3>
-                <p>Tamamen gıda sınıfı malzemelerden üretilmiştir. Güvenle oynayın.</p>
+                <p>Tamamen gıda sınıfı malzemelerden üretilmiştir.</p>
             </div>
             <div class="card">
                 <div class="icon">🧠</div>
@@ -54,7 +141,7 @@
             <div class="card">
                 <div class="icon">📵</div>
                 <h3>Ekran Detoksu</h3>
-                <p>Tabletleri bırakın, hamurları sıkın! Gerçek oyun deneyimi.</p>
+                <p>Tabletleri bırakın, hamurları sıkın!</p>
             </div>
         </div>
     </section>
@@ -63,27 +150,22 @@
         <h2>Favori Setlerimiz</h2>
         <div class="product-grid">
             <div class="product-item">
-                <img src="assets/product-1.jpg" alt="Squishables Başlangıç Seti">
+                <img src="product.jpg" alt="Squishables Başlangıç Seti">
                 <h3>Başlangıç Kiti</h3>
                 <p>3 Farklı Renk + 2 Kalıp</p>
                 <span class="price">₺450</span>
-                <button class="btn-buy">Sepete Ekle</button>
+                <button class="btn-buy" onclick="this.textContent='Eklendi!'; this.style.backgroundColor='#4CAF50';">Sepete Ekle</button>
             </div>
-            </div>
+        </div>
     </section>
 
     <footer id="contact">
         <div class="footer-content">
             <h3>Squishables</h3>
             <p>Hayal gücüne dokun.</p>
-            <div class="socials">
-                <a href="#">Instagram</a>
-                <a href="#">GitHub</a>
-            </div>
         </div>
-        <p class="copyright">&copy; 2025 Squishables. Tüm hakları saklıdır.</p>
+        <p class="copyright">&copy; 2025 Squishables.</p>
     </footer>
 
-    <script src="script.js"></script>
 </body>
 </html>
