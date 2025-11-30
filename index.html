@@ -1,64 +1,460 @@
+<!-- 
+    ============================================================================
+    PROJE: SQUISHABLES OFFICIAL WEBSITE - BLOG EDITION
+    SÜRÜM: 2.1 (IMAGE FIX)
+    
+    YENİLİKLER:
+    - Hero görseli referansı 'hero_cocuk.jpg' yerine 'hero.jpg' olarak güncellendi.
+    
+    GEREKLİ DOSYALAR (Yan Yana):
+    - logo.png, Product1.jpg
+    - hero.jpg
+    - blog_1.jpg, blog_2.jpg
+    ============================================================================
+-->
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Squishables | Ana Sayfa</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squishables - Yaratıcı Öğrenme Kiti</title>
+    
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- TEMEL AYARLAR --- */
+        :root {
+            --primary: #C4DFD9; --primary-dark: #2e5c4d;
+            --secondary: #FFD1BA; --secondary-dark: #d68c6d;
+            --accent: #DCD6F7; --accent-dark: #424874;
+            --bg-body: #fffcf8; --text-main: #2D3436; --text-light: #636E72;
+            --radius: 16px; --shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; text-decoration: none; }
+        
+        body { 
+            font-family: 'Nunito', sans-serif; background-color: var(--bg-body); color: var(--text-main);
+            overflow-x: hidden; position: relative;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Fredoka', sans-serif; letter-spacing: 0.5px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 0; position: sticky; top: 0;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 700; color: var(--accent-dark); }
+        .logo img { height: 40px; }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--text-light); font-weight: 600; transition: 0.3s; font-size: 1rem; }
+        .nav-links a:hover { color: var(--secondary-dark); }
+        
+        .nav-actions { display: flex; gap: 15px; align-items: center; }
+        .btn-login {
+            border: 2px solid var(--accent); padding: 8px 20px; border-radius: 20px;
+            color: var(--accent-dark); font-weight: 700; background: transparent; cursor: pointer;
+            transition: 0.3s; font-family: 'Fredoka', sans-serif;
+        }
+        .btn-login:hover { background: var(--accent); color: white; }
+
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.2rem; color: var(--text-main); }
+        .cart-badge {
+            position: absolute; top: -8px; right: -8px; background: var(--secondary-dark); color: white;
+            width: 18px; height: 18px; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: bold;
+        }
+
+        /* --- SECTIONS --- */
+        .hero { padding: 80px 0; display: flex; align-items: center; gap: 50px; }
+        .hero-content { flex: 1; }
+        .hero-content h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; color: #2d3436; }
+        .hero-content span { color: var(--secondary-dark); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 30px; max-width: 450px; }
+        
+        .btn-cta {
+            background: var(--secondary-dark); color: white; padding: 15px 35px; border-radius: 30px;
+            font-size: 1.1rem; font-weight: 700; border: none; cursor: pointer;
+            box-shadow: 0 10px 25px rgba(214, 140, 109, 0.3); transition: transform 0.2s; font-family: 'Fredoka', sans-serif;
+        }
+        .btn-cta:hover { transform: translateY(-3px); }
+        
+        .hero-image { flex: 1.2; }
+        .hero-image img { width: 100%; border-radius: 40px; box-shadow: 20px 20px 0 var(--accent); object-fit: cover; }
+
+        .product-section { padding: 80px 0; background: white; }
+        .product-container { display: flex; gap: 60px; align-items: center; }
+        .prod-img-box { flex: 1; background: #f9f9f9; border-radius: 40px; padding: 40px; text-align: center; }
+        .prod-img-box img { width: 80%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)); transition: 0.3s; }
+        .prod-img-box:hover img { transform: scale(1.05); }
+        
+        .prod-info { flex: 1; }
+        .prod-tag { background: var(--primary); color: var(--primary-dark); padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; margin-bottom: 15px; display: inline-block; }
+        .prod-title { font-size: 2.5rem; margin-bottom: 15px; }
+        .prod-price { font-size: 2rem; color: var(--secondary-dark); font-weight: 700; margin-bottom: 20px; display: block; }
+        .prod-desc { color: var(--text-light); line-height: 1.6; margin-bottom: 30px; }
+        
+        .features-list { list-style: none; margin-bottom: 30px; }
+        .features-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-weight: 600; }
+        .features-list li i { color: var(--success); }
+        
+        .btn-add-cart {
+            width: 100%; background: var(--text-main); color: white; padding: 18px; border-radius: 15px;
+            font-size: 1.1rem; font-weight: 700; border: none; cursor: pointer; transition: 0.3s;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .btn-add-cart:hover { background: black; transform: translateY(-2px); }
+
+        /* --- BLOG CARDS --- */
+        .blog-section { padding: 80px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 15px; }
+        .section-sub { text-align: center; color: var(--text-light); margin-bottom: 50px; }
+        
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .blog-card { background: white; border-radius: 25px; overflow: hidden; box-shadow: var(--shadow); transition: 0.3s; cursor: pointer; }
+        .blog-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .blog-img { height: 200px; width: 100%; object-fit: cover; }
+        .blog-content { padding: 25px; }
+        .blog-cat { color: var(--accent-dark); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 10px; }
+        .blog-title { font-size: 1.3rem; margin-bottom: 10px; line-height: 1.4; }
+        .blog-read { color: var(--secondary-dark); font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--text-main); color: white; padding: 60px 0 20px 0; }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 50px; }
+        .footer-col h4 { font-size: 1.2rem; margin-bottom: 20px; color: var(--primary); }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li a { color: #bbb; transition: 0.2s; font-size: 0.9rem; }
+        .footer-col ul li a:hover { color: white; }
+        .copyright { text-align: center; border-top: 1px solid #444; padding-top: 20px; color: #777; font-size: 0.9rem; }
+
+        /* --- MODAL SİSTEMİ --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 2000;
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; }
+        
+        .modal-box {
+            background: white; width: 450px; padding: 40px; border-radius: 30px;
+            text-align: center; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform: translateY(20px); transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        
+        .close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #aaa; transition: 0.2s; }
+        .close-modal:hover { color: #333; }
+
+        /* --- FULL SCREEN BLOG READER --- */
+        #blog-reader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; z-index: 3000; overflow-y: auto;
+            display: none; animation: slideUp 0.4s ease;
+        }
+        .reader-container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .reader-header { text-align: center; margin-bottom: 40px; }
+        .reader-cat { color: var(--secondary-dark); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; display: block; }
+        .reader-title { font-size: 3rem; line-height: 1.2; margin-bottom: 20px; color: #2d3436; }
+        .reader-meta { color: #888; font-size: 0.9rem; }
+        .reader-img { width: 100%; height: 400px; object-fit: cover; border-radius: 20px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .reader-content { font-size: 1.2rem; line-height: 1.8; color: #4a4a4a; }
+        .reader-content p { margin-bottom: 20px; }
+        .reader-content h3 { font-size: 1.8rem; margin: 40px 0 20px 0; color: #2d3436; }
+        
+        .reader-close {
+            position: fixed; top: 30px; right: 30px; width: 50px; height: 50px;
+            background: #f0f0f0; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; cursor: pointer; transition: 0.2s; z-index: 3001;
+        }
+        .reader-close:hover { background: #e0e0e0; transform: rotate(90deg); }
+
+        @keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 40px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .product-container { flex-direction: column; }
+            .nav-links { display: none; }
+            .reader-title { font-size: 2rem; }
+            .reader-img { height: 250px; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- READER OVERLAY (BLOG OKUMA MODU) -->
+    <div id="blog-reader">
+        <div class="reader-close" onclick="closeReader()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="reader-container">
+            <div class="reader-header">
+                <span id="r-cat" class="reader-cat">KATEGORİ</span>
+                <h1 id="r-title" class="reader-title">Başlık</h1>
+                <span id="r-date" class="reader-meta">Tarih</span>
+            </div>
+            <img id="r-img" src="" class="reader-img">
+            <div id="r-body" class="reader-content">
+                <!-- İçerik JS ile gelecek -->
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo"><img src="logo.png" alt="Logo"> Squishables</a>
-                <ul class="nav-links">
-                    <li><a href="index.html" style="color:var(--primary)">Ana Sayfa</a></li>
-                    <li><a href="app.html">Uygulama</a></li>
-                    <li><a href="products.html">Ürünler</a></li>
-                    <li><a href="guide.html">Rehber</a></li>
-                    <li><button class="btn-outline" onclick="toggleLogin()">Giriş Yap</button></li>
-                    <li class="cart-btn-wrap" onclick="toggleCart()">🛒 <span id="cart-count" class="badge">0</span></li>
-                </ul>
+                <a href="#" class="logo"><img src="logo.png" alt="Logo">Squishables</a>
+                <div class="nav-links">
+                    <a href="#" class="active">Ana Sayfa</a>
+                    <a href="#">Uygulama</a>
+                    <a href="#products">Ürünler</a>
+                    <a href="#blog">Rehber</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="btn-login" onclick="openModal('auth-modal')">Giriş Yap</button>
+                    <div class="cart-icon" onclick="openModal('cart-modal')">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <div class="cart-badge" id="cart-count">0</div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
 
-    <section class="container hero-section">
-        <div class="hero-text">
-            <h1>Hands On, <br> <span>Screens Off.</span></h1>
-            <p>Çocukları ekran başından alıp, parmak uçlarındaki sihirli dünyaya davet ediyoruz.</p>
-            <a href="products.html" class="btn-cta">Setleri İncele</a>
+    <!-- HERO -->
+    <section class="hero container">
+        <div class="hero-content">
+            <h1>Hands On,<br><span style="color:var(--secondary-dark)">Screens Off.</span></h1>
+            <p>Çocukları ekran bağımlılığından uzaklaştıran, dokunarak öğrenmeyi sağlayan ödüllü duyusal oyun kiti.</p>
+            <button class="btn-cta" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Setleri İncele</button>
         </div>
-        <div class="hero-media">
-            <img src="hero.jpg" alt="Ana Görsel">
-        </div>
-    </section>
-
-    <section class="container" style="margin-bottom:80px; text-align:center;">
-        <h2 style="font-family:'Fredoka'; color:var(--secondary); margin-bottom:20px;">ASMR Deneyimi</h2>
-        <div class="hero-media">
-            <video width="100%" controls>
-                <source src="asmr.mp4" type="video/mp4">
-                Video desteklenmiyor.
-            </video>
+        <div class="hero-image">
+            <img src="hero.jpg" alt="Mutlu Çocuk" onerror="this.src='https://placehold.co/600x400?text=Hero+Image'">
         </div>
     </section>
 
-    <div id="cartSidebar" class="cart-sidebar">
-        <h3>Sepetim <span onclick="toggleCart()" style="float:right; cursor:pointer">&times;</span></h3>
-        <div id="cart-items" style="flex:1; margin-top:20px;"></div>
-        <h4 id="cart-total">Toplam: ₺0</h4>
-        <button class="btn-cta" style="width:100%; margin-top:10px;">Öde</button>
-    </div>
+    <!-- PRODUCT -->
+    <section id="products" class="product-section">
+        <div class="container product-container">
+            <div class="prod-img-box">
+                <img src="Product1.jpg" alt="Squishables Kit" onerror="this.src='https://placehold.co/500x500?text=Urun'">
+            </div>
+            <div class="prod-info">
+                <span class="prod-tag">YENİ</span>
+                <h2 class="prod-title">Aile Bağları Duyusal Kiti</h2>
+                <span class="prod-price">899.90 ₺</span>
+                <p class="prod-desc">4 renk doğal hamur, ahşap şekillendirme aletleri, aktivite kartları ve <b>Squishables Uygulaması</b>'na ömür boyu erişim içerir.</p>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-check"></i> %100 Toksik Olmayan Doğal İçerik</li>
+                    <li><i class="fa-solid fa-check"></i> İnce Motor Becerilerini Geliştirir</li>
+                    <li><i class="fa-solid fa-check"></i> Uygulama ile Entegre Öğrenme</li>
+                </ul>
+                <button class="btn-add-cart" onclick="addToCart()"><i class="fa-solid fa-bag-shopping"></i> Sepete Ekle</button>
+            </div>
+        </div>
+    </section>
 
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span onclick="toggleLogin()" style="position:absolute; right:20px; top:10px; cursor:pointer;">&times;</span>
-            <h2>Giriş Yap</h2>
-            <input class="input-group" placeholder="E-posta"><input class="input-group" type="password" placeholder="Şifre">
-            <button class="btn-cta">Giriş</button>
+    <!-- BLOG & REHBER (AKTİF) -->
+    <section id="blog" class="blog-section container">
+        <h2 class="section-title">Ebeveyn Rehberi</h2>
+        <p class="section-sub">Çocuk gelişimi uzmanlarımızdan öneriler ve oyun fikirleri.</p>
+        
+        <div class="blog-grid">
+            <!-- Blog 1 -->
+            <div class="blog-card" onclick="openBlog(1)">
+                <img src="blog_1.jpg" class="blog-img" onerror="this.src='https://placehold.co/400x250?text=Blog+1'">
+                <div class="blog-content">
+                    <span class="blog-cat">GELİŞİM</span>
+                    <h3 class="blog-title">Neden Duyusal Oyun?</h3>
+                    <p>Beyin gelişimi ve duyusal oyun arasındaki bilimsel bağ.</p>
+                    <span class="blog-read">Oku <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </div>
+            
+            <!-- Blog 2 -->
+            <div class="blog-card" onclick="openBlog(2)">
+                <img src="blog_2.jpg" class="blog-img" onerror="this.src='https://placehold.co/400x250?text=Blog+2'">
+                <div class="blog-content">
+                    <span class="blog-cat">AKTİVİTE</span>
+                    <h3 class="blog-title">5 Dakikada Bağ Kurun</h3>
+                    <p>Yoğun ebeveynler için kısa ve etkili oyun rutinleri.</p>
+                    <span class="blog-read">Oku <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </div>
+            
+            <!-- E-Book -->
+            <div class="blog-card" style="background:#fdf0f0;" onclick="openEbookModal()">
+                <div style="height:200px; display:flex; align-items:center; justify-content:center; font-size:4rem; color:var(--secondary-dark);">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </div>
+                <div class="blog-content">
+                    <span class="blog-cat">E-KİTAP</span>
+                    <h3 class="blog-title">Duyusal Oyun El Kitabı</h3>
+                    <p>Ücretsiz başlangıç rehberini hemen indirin.</p>
+                    <span class="blog-read">İndir <i class="fa-solid fa-download"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col" style="flex:1.5;">
+                    <h3 style="color:white; margin-bottom:15px;">Squishables</h3>
+                    <p style="color:#aaa;">Çocuklar için oyun, ebeveynler için çözüm.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="#">Ana Sayfa</a></li>
+                        <li><a href="#products">Mağaza</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">&copy; 2025 Squishables. Tüm hakları saklıdır.</div>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+    
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal-overlay" onclick="closeModal(event, 'auth-modal')">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('auth-modal').style.display='none'"></i>
+            <h2 style="margin-bottom:20px;">Giriş Yap</h2>
+            <input type="email" class="modal-input" placeholder="E-Posta Adresi" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:10px;">
+            <input type="password" class="modal-input" placeholder="Şifre" style="width:100%; padding:12px; margin-bottom:20px; border:1px solid #ddd; border-radius:10px;">
+            <button class="btn-add-cart">Giriş Yap</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal-overlay" onclick="closeModal(event, 'cart-modal')">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('cart-modal').style.display='none'"></i>
+            <h2>Sepetim</h2>
+            <div id="cart-content" style="margin:30px 0; color:#888;">Sepetiniz boş.</div>
+            <div id="cart-footer" style="display:none;">
+                <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; margin-bottom:20px;"><span>Toplam:</span><span>899.90 ₺</span></div>
+                <button class="btn-add-cart" style="background:var(--success);" onclick="alert('Ödeme sayfasına yönlendiriliyorsunuz...')">Ödemeye Geç</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- E-Book Modal -->
+    <div id="ebook-modal" class="modal-overlay" onclick="closeModal(event, 'ebook-modal')">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('ebook-modal').style.display='none'"></i>
+            <i class="fa-solid fa-envelope-open-text" style="font-size:3rem; color:var(--secondary-dark); margin-bottom:20px;"></i>
+            <h3>E-Kitabı İndir</h3>
+            <p style="margin-bottom:20px; color:#666;">E-posta adresinizi girin, indirme linkini hemen gönderelim.</p>
+            <input type="email" placeholder="E-Posta Adresiniz" style="width:100%; padding:12px; border:1px solid #ddd; border-radius:10px; margin-bottom:15px;">
+            <button class="btn-add-cart" onclick="alert('Link gönderildi!'); document.getElementById('ebook-modal').style.display='none'">Gönder</button>
+        </div>
+    </div>
+
+    <script>
+        // --- BLOG VERİ TABANI ---
+        const blogData = {
+            1: {
+                title: "Neden Duyusal Oyun?",
+                cat: "ÇOCUK GELİŞİMİ",
+                date: "15 Kasım 2024",
+                img: "blog_1.jpg",
+                content: `
+                    <p>Duyusal oyun, bir çocuğun duyularını (dokunma, koklama, tatma, görme ve işitme) harekete geçiren her türlü aktivitedir. Bu oyun türü, çocukların dünyayı keşfetmeleri ve anlamlandırmaları için kritik bir yoldur.</p>
+                    <h3>Beyin Gelişimi İçin Yakıt</h3>
+                    <p>Çocuklar oyun hamurunu sıktığında, yuvarladığında veya şekil verdiğinde, beyinlerinde milyonlarca nöral bağlantı oluşur. Bu, ilerideki karmaşık öğrenme süreçleri için temel oluşturur.</p>
+                    <h3>Sakinleşme ve Duygusal Düzenleme</h3>
+                    <p>Squishables gibi dokulu ve kokulu materyallerle oynamak, çocukların sinir sistemini yatıştırır. Özellikle aşırı uyarılan veya öfkeli anlarda, hamurla oynamak "topraklanma" etkisi yaratır.</p>
+                    <p>Unutmayın, oyun sadece eğlence değildir; çocuğunuzun işidir.</p>
+                `
+            },
+            2: {
+                title: "5 Dakikada Bağ Kurun",
+                cat: "PRATİK AKTİVİTELER",
+                date: "20 Kasım 2024",
+                img: "blog_2.jpg",
+                content: `
+                    <p>Modern ebeveynlikte zaman en kısıtlı kaynağımız. Ancak çocuklarınızla kaliteli bağ kurmak için saatlere ihtiyacınız yok. İşte Squishables kitiyle yapabileceğiniz 5 dakikalık "Bağ Kurma" rutinleri:</p>
+                    <h3>1. "Günün Duygusu" Heykeli</h3>
+                    <p>İşten eve geldiğinizde, çocuğunuzla masaya oturun. "Bugün nasıl hissettin?" diye sorun ve bu duyguyu hamurla bir heykele dönüştürmesini isteyin. Siz de kendi gününüzü yapın. Sonuçlar sizi şaşırtacak!</p>
+                    <h3>2. Sessiz Heykeltıraş</h3>
+                    <p>Sadece 3 dakika boyunca konuşmadan, sırayla birbirinizin yaptığı hamur şekline bir parça ekleyin. Bu sessiz işbirliği, derin bir uyum ve odaklanma sağlar.</p>
+                    <p>Küçük anlar, büyük anılar yaratır.</p>
+                `
+            }
+        };
+
+        // --- FONKSİYONLAR ---
+        
+        // Blog Açma
+        function openBlog(id) {
+            const data = blogData[id];
+            if(!data) return;
+            
+            document.getElementById('r-cat').innerText = data.cat;
+            document.getElementById('r-title').innerText = data.title;
+            document.getElementById('r-date').innerText = data.date;
+            document.getElementById('r-img').src = data.img;
+            document.getElementById('r-img').onerror = function() { this.src = 'https://placehold.co/800x400?text=Blog+Gorseli'; };
+            document.getElementById('r-body').innerHTML = data.content;
+            
+            const reader = document.getElementById('blog-reader');
+            reader.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Arka planı kilitle
+        }
+
+        function closeReader() {
+            document.getElementById('blog-reader').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Sepet İşlemleri
+        let cartCount = 0;
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            
+            const html = `
+                <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px;">
+                    <img src="Product1.jpg" style="width:60px; height:60px; object-fit:cover; border-radius:10px;" onerror="this.src='https://placehold.co/60x60'">
+                    <div><div style="font-weight:700;">Aile Bağları Kiti</div><div style="color:#888;">1 x 899.90 ₺</div></div>
+                </div>
+            `;
+            document.getElementById('cart-content').innerHTML = html;
+            document.getElementById('cart-footer').style.display = 'block';
+            
+            openModal('cart-modal');
+        }
+
+        // Modal
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+        function closeModal(e, id) {
+            if(e.target.id === id) {
+                document.getElementById(id).classList.remove('active');
+                setTimeout(() => document.getElementById(id).style.display = 'none', 300);
+            }
+        }
+        function openEbookModal() { openModal('ebook-modal'); }
+    </script>
 </body>
 </html>
