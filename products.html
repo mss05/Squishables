@@ -1,66 +1,309 @@
+<!-- 
+    ============================================================================
+    SAYFA: ÜRÜNLER (STORE)
+    DOSYA ADI: products.html
+    
+    YENİLİKLER:
+    - Sadece "Aile Bağları Kiti" ana ürün olarak eklendi.
+    - Merch Ürünleri (Şapka, Tişört, Sweat) eklendi.
+    - Beden Seçimi (S, M, L, XL) özelliği eklendi.
+    - Beden Tablosu Modal'ı eklendi.
+    
+    GEREKLİ DOSYALAR:
+    - logo.png, Product1.jpg
+    - merch_sapka.jpg, merch_tisort.jpg, merch_sweat.jpg (YENİLER)
+    ============================================================================
+-->
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Squishables | Ürünler</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squishables - Mağaza</title>
+    
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- TEMEL AYARLAR --- */
+        :root {
+            --primary: #C4DFD9; --primary-dark: #2e5c4d;
+            --secondary: #FFD1BA; --secondary-dark: #d68c6d;
+            --accent: #DCD6F7; --accent-dark: #424874;
+            --bg-body: #fffcf8; --text-main: #2D3436; --text-light: #636E72;
+            --radius: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; text-decoration: none; }
+        body { font-family: 'Nunito', sans-serif; background-color: var(--bg-body); color: var(--text-main); }
+        h1, h2, h3 { font-family: 'Fredoka', sans-serif; letter-spacing: 0.5px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* HEADER */
+        header { padding: 20px 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.03); position: sticky; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 700; color: var(--accent-dark); }
+        .logo img { height: 40px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--text-light); font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--secondary-dark); }
+        .nav-links a.active { font-weight: 800; }
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.2rem; }
+        .cart-badge { position: absolute; top: -8px; right: -8px; background: var(--secondary-dark); color: white; width: 18px; height: 18px; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+        /* --- ANA ÜRÜN (HERO PRODUCT) --- */
+        .hero-product { padding: 80px 0; background: white; margin-bottom: 50px; }
+        .product-container { display: flex; gap: 60px; align-items: center; }
+        .prod-img-box { flex: 1; background: #f9f9f9; border-radius: 40px; padding: 40px; text-align: center; }
+        .prod-img-box img { width: 80%; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1)); transition: 0.3s; }
+        .prod-img-box:hover img { transform: scale(1.05); }
+        
+        .prod-info { flex: 1; }
+        .prod-tag { background: var(--primary); color: var(--primary-dark); padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; margin-bottom: 15px; display: inline-block; }
+        .prod-title { font-size: 2.8rem; margin-bottom: 15px; line-height: 1.2; }
+        .prod-price { font-size: 2.2rem; color: var(--secondary-dark); font-weight: 700; margin-bottom: 20px; display: block; }
+        .prod-desc { color: var(--text-light); line-height: 1.6; margin-bottom: 30px; font-size: 1.1rem; }
+        
+        .features-list { list-style: none; margin-bottom: 30px; }
+        .features-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1rem; }
+        .features-list li i { color: var(--primary-dark); background: var(--primary); padding: 5px; border-radius: 50%; font-size: 0.8rem; }
+        
+        .btn-add-cart { width: 100%; background: var(--text-main); color: white; padding: 18px; border-radius: 15px; font-size: 1.1rem; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; font-family: 'Fredoka', sans-serif; }
+        .btn-add-cart:hover { background: black; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        /* --- MERCH ÜRÜNLERİ --- */
+        .merch-section { padding: 60px 0; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; }
+        
+        .merch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .merch-card { background: white; border-radius: 25px; padding: 25px; text-align: center; transition: 0.3s; border: 1px solid transparent; }
+        .merch-card:hover { border-color: #eee; box-shadow: 0 15px 40px rgba(0,0,0,0.05); transform: translateY(-5px); }
+        
+        .merch-img { width: 100%; height: 250px; object-fit: contain; margin-bottom: 20px; border-radius: 15px; background: #fdfdfd; }
+        .merch-title { font-size: 1.4rem; margin-bottom: 10px; }
+        .merch-price { font-size: 1.2rem; color: var(--secondary-dark); font-weight: 700; display: block; margin-bottom: 20px; }
+        
+        /* Beden Seçimi */
+        .size-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .size-opt { 
+            width: 35px; height: 35px; border: 1px solid #ddd; border-radius: 8px; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer; 
+            font-size: 0.8rem; font-weight: 700; color: #888; transition: 0.2s;
+        }
+        .size-opt:hover { border-color: var(--text-main); color: var(--text-main); }
+        .size-opt.active { background: var(--text-main); color: white; border-color: var(--text-main); }
+        
+        .size-guide-btn { color: var(--text-light); text-decoration: underline; font-size: 0.8rem; cursor: pointer; display: block; margin-bottom: 15px; }
+
+        .btn-merch { background: transparent; border: 2px solid var(--text-main); color: var(--text-main); width: 100%; padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Fredoka', sans-serif; }
+        .btn-merch:hover { background: var(--text-main); color: white; }
+
+        /* MODALS (Sepet ve Beden Tablosu) */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal-box { background: white; width: 450px; padding: 40px; border-radius: 30px; text-align: center; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        .close-modal { position: absolute; top: 20px; right: 20px; cursor: pointer; font-size: 1.5rem; color: #aaa; }
+        
+        /* Beden Tablosu */
+        .size-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9rem; }
+        .size-table th, .size-table td { border: 1px solid #eee; padding: 10px; text-align: center; }
+        .size-table th { background: #f9f9f9; font-weight: 700; }
+
+        /* Footer */
+        footer { background: var(--text-main); color: white; padding: 40px 0; text-align: center; margin-top: 50px; }
+
+        @media (max-width: 768px) { .product-container { flex-direction: column; } .nav-links { display: none; } }
+    </style>
 </head>
 <body>
+
+    <!-- NAVBAR -->
     <header>
         <div class="container">
             <nav>
-                <a href="index.html" class="logo"><img src="logo.png" alt="Logo"> Squishables</a>
-                <ul class="nav-links">
-                    <li><a href="index.html">Ana Sayfa</a></li>
-                    <li><a href="app.html">Uygulama</a></li>
-                    <li><a href="products.html" style="color:var(--primary)">Ürünler</a></li>
-                    <li><a href="guide.html">Rehber</a></li>
-                    <li><button class="btn-outline" onclick="toggleLogin()">Giriş Yap</button></li>
-                    <li class="cart-btn-wrap" onclick="toggleCart()">🛒 <span id="cart-count" class="badge">0</span></li>
-                </ul>
+                <a href="index.html" class="logo"><img src="logo.png" alt="Logo">Squishables</a>
+                <div class="nav-links">
+                    <a href="index.html">Ana Sayfa</a>
+                    <a href="app.html">Uygulama</a>
+                    <a href="#" class="active">Ürünler</a>
+                    <a href="guide.html">Rehber</a>
+                </div>
+                <div class="cart-icon" onclick="openModal('cart-modal')"><i class="fa-solid fa-cart-shopping"></i><div class="cart-badge" id="cart-count">0</div></div>
             </nav>
         </div>
     </header>
 
-    <div class="container">
-        <h2 style="text-align:center; margin-top:40px; font-family:'Fredoka'; color:var(--secondary);">Tüm Setlerimiz</h2>
-        <div class="grid-3">
-            <div class="card">
-                <img src="product1.jpg" alt="Ürün 1">
-                <h3>Başlangıç Kiti</h3>
-                <span class="price">₺450</span>
-                <button class="btn-cta" onclick="addToCart(1)">Sepete Ekle</button>
+    <!-- 1. ANA ÜRÜN (HERO PRODUCT) -->
+    <section class="hero-product">
+        <div class="container product-container">
+            <div class="prod-img-box">
+                <img src="Product1.jpg" alt="Aile Bağları Kiti" onerror="this.src='https://placehold.co/500x500?text=Urun'">
             </div>
-            <div class="card">
-                <img src="product2.jpg" alt="Ürün 2">
-                <h3>Orman Maceraları</h3>
-                <span class="price">₺550</span>
-                <button class="btn-cta" onclick="addToCart(2)">Sepete Ekle</button>
+            <div class="prod-info">
+                <span class="prod-tag">ÇOK SATAN</span>
+                <h1 class="prod-title">Aile Bağları Duyusal Kiti</h1>
+                <span class="prod-price">899.90 ₺</span>
+                <p class="prod-desc">
+                    Çocuğunuzla kaliteli zaman geçirmenin en eğlenceli yolu. 4 renk doğal hamur, ahşap şekillendirme araçları ve Squishables Uygulaması'na sınırsız erişim içerir.
+                </p>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-check"></i> %100 Organik & Toksik Olmayan İçerik</li>
+                    <li><i class="fa-solid fa-check"></i> İnce Motor Becerilerini Geliştirir</li>
+                    <li><i class="fa-solid fa-check"></i> Uygulama ile Entegre Buddy Sistemi</li>
+                </ul>
+                <button class="btn-add-cart" onclick="addToCart('Aile Bağları Kiti', 899.90, 'Product1.jpg')">
+                    <i class="fa-solid fa-bag-shopping"></i> Sepete Ekle
+                </button>
             </div>
-            <div class="card">
-                <img src="product3.jpg" alt="Ürün 3">
-                <h3>Uzay Kaşifi</h3>
-                <span class="price">₺600</span>
-                <button class="btn-cta" onclick="addToCart(3)">Sepete Ekle</button>
+        </div>
+    </section>
+
+    <!-- 2. MERCH KOLEKSİYONU -->
+    <section class="merch-section container">
+        <h2 class="section-title">Squishables Merch</h2>
+        <div class="merch-grid">
+            
+            <!-- ŞAPKA -->
+            <div class="merch-card">
+                <img src="merch_sapka.jpg" class="merch-img" onerror="this.src='https://placehold.co/300x300?text=Sapka'">
+                <h3 class="merch-title">Squish Cap</h3>
+                <span class="merch-price">249.90 ₺</span>
+                <div class="size-selector" id="size-cap">
+                    <div class="size-opt active" onclick="selectSize(this)">Tek Ebat</div>
+                </div>
+                <button class="btn-merch" onclick="addToCart('Squish Cap', 249.90, 'merch_sapka.jpg', 'Tek Ebat')">Sepete Ekle</button>
+            </div>
+
+            <!-- TİŞÖRT -->
+            <div class="merch-card">
+                <img src="merch_tisort.jpg" class="merch-img" onerror="this.src='https://placehold.co/300x300?text=Tisort'">
+                <h3 class="merch-title">Logo T-Shirt</h3>
+                <span class="merch-price">349.90 ₺</span>
+                <div class="size-selector" id="size-tshirt">
+                    <div class="size-opt" onclick="selectSize(this)">S</div>
+                    <div class="size-opt active" onclick="selectSize(this)">M</div>
+                    <div class="size-opt" onclick="selectSize(this)">L</div>
+                    <div class="size-opt" onclick="selectSize(this)">XL</div>
+                </div>
+                <span class="size-guide-btn" onclick="openModal('size-modal')">Beden Tablosu</span>
+                <button class="btn-merch" onclick="addToCart('Logo T-Shirt', 349.90, 'merch_tisort.jpg', getSelectedSize('size-tshirt'))">Sepete Ekle</button>
+            </div>
+
+            <!-- SWEATSHIRT -->
+            <div class="merch-card">
+                <img src="merch_sweat.jpg" class="merch-img" onerror="this.src='https://placehold.co/300x300?text=Sweatshirt'">
+                <h3 class="merch-title">Comfort Sweatshirt</h3>
+                <span class="merch-price">699.90 ₺</span>
+                <div class="size-selector" id="size-sweat">
+                    <div class="size-opt" onclick="selectSize(this)">S</div>
+                    <div class="size-opt active" onclick="selectSize(this)">M</div>
+                    <div class="size-opt" onclick="selectSize(this)">L</div>
+                    <div class="size-opt" onclick="selectSize(this)">XL</div>
+                </div>
+                <span class="size-guide-btn" onclick="openModal('size-modal')">Beden Tablosu</span>
+                <button class="btn-merch" onclick="addToCart('Comfort Sweatshirt', 699.90, 'merch_sweat.jpg', getSelectedSize('size-sweat'))">Sepete Ekle</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container"><p>&copy; 2025 Squishables. Tüm hakları saklıdır.</p></div>
+    </footer>
+
+    <!-- MODALS -->
+    
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal-overlay" onclick="closeModal(event, 'cart-modal')">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('cart-modal').style.display='none'"></i>
+            <h2 style="font-family:'Fredoka',sans-serif; margin-bottom:20px;">Sepetim</h2>
+            <div id="cart-content" style="margin:30px 0; color:#888;">Sepetiniz boş.</div>
+            <div id="cart-footer" style="display:none;">
+                <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom:20px;"><span>Toplam:</span><span id="cart-total-price">0 ₺</span></div>
+                <button class="btn-add-cart" style="background:var(--success);" onclick="alert('Ödemeye yönlendiriliyorsunuz...')">Ödemeye Geç</button>
             </div>
         </div>
     </div>
 
-    <div id="cartSidebar" class="cart-sidebar">
-        <h3>Sepetim <span onclick="toggleCart()" style="float:right; cursor:pointer">&times;</span></h3>
-        <div id="cart-items" style="flex:1; margin-top:20px;"></div>
-        <h4 id="cart-total">Toplam: ₺0</h4>
-        <button class="btn-cta" style="width:100%; margin-top:10px;">Öde</button>
-    </div>
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span onclick="toggleLogin()" style="position:absolute; right:20px; top:10px; cursor:pointer;">&times;</span>
-            <h2>Giriş Yap</h2>
-            <input class="input-group" placeholder="E-posta"><input class="input-group" type="password" placeholder="Şifre">
-            <button class="btn-cta">Giriş</button>
+    <!-- Size Guide Modal -->
+    <div id="size-modal" class="modal-overlay" onclick="closeModal(event, 'size-modal')">
+        <div class="modal-box">
+            <i class="fa-solid fa-xmark close-modal" onclick="document.getElementById('size-modal').style.display='none'"></i>
+            <h3>Beden Tablosu (cm)</h3>
+            <table class="size-table">
+                <tr><th>Beden</th><th>Göğüs</th><th>Boy</th></tr>
+                <tr><td>S</td><td>50</td><td>68</td></tr>
+                <tr><td>M</td><td>53</td><td>70</td></tr>
+                <tr><td>L</td><td>56</td><td>72</td></tr>
+                <tr><td>XL</td><td>60</td><td>74</td></tr>
+            </table>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        let cart = [];
+        
+        // Sepet İşlemleri
+        function addToCart(title, price, img, size = null) {
+            cart.push({ title, price, img, size });
+            updateCartUI();
+            openModal('cart-modal');
+        }
+
+        function updateCartUI() {
+            const count = cart.length;
+            document.getElementById('cart-count').innerText = count;
+            localStorage.setItem('cartCount', count);
+
+            const content = document.getElementById('cart-content');
+            let total = 0;
+            
+            if (count === 0) {
+                content.innerHTML = "Sepetiniz boş.";
+                document.getElementById('cart-footer').style.display = 'none';
+            } else {
+                let html = '';
+                cart.forEach(item => {
+                    total += item.price;
+                    html += `
+                        <div style="display:flex; align-items:center; gap:15px; margin-bottom:15px; text-align:left; border-bottom:1px solid #eee; padding-bottom:10px;">
+                            <img src="${item.img}" style="width:50px; height:50px; object-fit:cover; border-radius:8px;" onerror="this.src='https://placehold.co/50x50'">
+                            <div>
+                                <div style="font-weight:700; font-size:0.9rem;">${item.title}</div>
+                                <div style="color:#888; font-size:0.8rem;">${item.size ? 'Beden: ' + item.size + ' | ' : ''}${item.price.toFixed(2)} ₺</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                content.innerHTML = html;
+                document.getElementById('cart-total-price').innerText = total.toFixed(2) + " ₺";
+                document.getElementById('cart-footer').style.display = 'block';
+            }
+        }
+
+        // Beden Seçimi
+        function selectSize(el) {
+            const parent = el.parentElement;
+            parent.querySelectorAll('.size-opt').forEach(opt => opt.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function getSelectedSize(parentId) {
+            const parent = document.getElementById(parentId);
+            const active = parent.querySelector('.active');
+            return active ? active.innerText : 'Standart';
+        }
+
+        // Modal
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(e, id) { if(e.target.id === id) document.getElementById(id).style.display = 'none'; }
+        
+        // Başlangıçta sepeti sıfırla (Demo için)
+        localStorage.setItem('cartCount', 0);
+    </script>
 </body>
 </html>
